@@ -31,14 +31,14 @@ if (! $groupmembers = groupmembers_get_groupmembers($cm->instance)) {
     print_error('invalidcoursemodule');
 }
 
-$PAGE->set_title($cm->name);
+$PAGE->set_title($groupmembers->name);
 $PAGE->set_heading($course->fullname);
 
 // Completion and trigger events.
 groupmembers_view($groupmembers, $course, $cm, $context);
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(format_string($choice->name), 2, null);
+echo $OUTPUT->heading(format_string($groupmembers->name), 2, null);
 
 $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
 

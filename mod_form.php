@@ -8,7 +8,7 @@ require_once ($CFG->dirroot.'/course/moodleform_mod.php');
 class mod_groupmembers_mod_form extends moodleform_mod {
 
     function definition() {
-        global $CFG, $COURSE, $CHOICE_DISPLAY, $DB;
+        global $CFG, $COURSE, $DB;
 
         $mform    =& $this->_form;
 
@@ -26,8 +26,6 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         $this->standard_intro_elements(get_string('description', 'groupmembers'));
 
-        $mform->addElement('select', 'display', get_string("displaymode","groupmembers"), $CHOICE_DISPLAY);
-
         // Groupings selector - used to select grouping for groups in activity.
         $options = array();
         if ($groupings = $DB->get_records('groupings', array('courseid'=>$COURSE->id))) {
@@ -38,6 +36,7 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         core_collator::asort($options);
         $options = array(0 => get_string('none')) + $options;
         $mform->addElement('select', 'listgroupingid', get_string('listgrouping', 'groupmembers'), $options);
+        $mform->addRule('listgroupingid', null, 'required', null, 'client');
 
 //-------------------------------------------------------------------------------
         $this->standard_coursemodule_elements();

@@ -15,5 +15,5 @@ $string['groupmembers:view'] = 'View group members';
 $string['groupmembersname'] = 'Name of members list';
 $string['displaymode'] = 'Display mode';
 $string['description'] = 'Description';
-$string['listgrouping'] = 'List groups of grouping';
+$string['listgrouping'] = 'Show groups of';
 

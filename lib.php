@@ -11,16 +11,16 @@
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * List of features supported in Resource module
+ * List of features supported in groupmembers module
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed True if module supports feature, false if not, null if doesn't know
  */
-function resource_supports($feature) {
+function groupmembers_supports($feature) {
     switch($feature) {
         case FEATURE_MOD_ARCHETYPE:           return MOD_ARCHETYPE_OTHER;
         case FEATURE_GROUPS:                  return false;
         case FEATURE_GROUPINGS:               return false;
-        case FEATURE_MOD_INTRO:               return false;
+        case FEATURE_MOD_INTRO:               return true;
         case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
@@ -89,7 +89,7 @@ function groupmembers_delete_instance($id) {
  *
  * @global object
  * @param int $groupmembersid
- * @return object|bool The choice or false
+ * @return object|bool The groupmembers or false
  */
 function groupmembers_get_groupmembers($groupmembersid) {
     global $DB;
