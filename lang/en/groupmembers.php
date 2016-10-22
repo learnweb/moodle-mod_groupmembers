@@ -9,6 +9,10 @@
  */
 
 $string['modulename'] = 'Group Members';
+$string['modulenameplural'] = 'Group Members';
+$string['modulename_help'] = 'Use the Group Members module to list the members of all groups in one selected grouping.';
+$string['pluginadministration'] = 'newmodule administration';
+$string['pluginname'] = 'newmodule';
 $string['nodata'] = 'There is no data to display here.';
 $string['groupmembers:addinstance'] = 'Add a new list of group members';
 $string['groupmembers:view'] = 'View group members';

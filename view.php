@@ -25,6 +25,7 @@ if (! $course = $DB->get_record("course", array("id" => $cm->course))) {
 }
 
 require_course_login($course, false, $cm);
+$context = context_module::instance($cm->id);
 
 // load groupmembers object
 if (! $groupmembers = groupmembers_get_groupmembers($cm->instance)) {
@@ -34,7 +35,7 @@ if (! $groupmembers = groupmembers_get_groupmembers($cm->instance)) {
 $PAGE->set_title($groupmembers->name);
 $PAGE->set_heading($course->fullname);
 
-// Completion and trigger events.
+// Completion and trigger event.
 groupmembers_view($groupmembers, $course, $cm, $context);
 
 echo $OUTPUT->header();
