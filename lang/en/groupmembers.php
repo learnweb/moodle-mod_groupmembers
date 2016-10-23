@@ -20,4 +20,7 @@ $string['groupmembersname'] = 'Name of members list';
 $string['displaymode'] = 'Display mode';
 $string['description'] = 'Description';
 $string['listgrouping'] = 'Show groups of';
+$string['firstname'] = 'First name';
+$string['lastname'] = 'Last name';
+$string['email'] = 'E-mail';
 

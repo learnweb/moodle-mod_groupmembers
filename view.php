@@ -45,11 +45,12 @@ $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
 
 foreach ($groups as $group) {
     $table = new html_table();
-    $table->head(array(
+    $table->head = array(
         get_string("lastname", "groupmembers"),
         get_string("firstname", "groupmembers"),
         get_string("email", "groupmembers")
-    ));
+    );
+    $table->data = array();
 
     $members = groups_get_members($group->id);
     foreach ($members as $member) {
@@ -61,7 +62,7 @@ foreach ($groups as $group) {
     }
 
     echo '<h3>' . htmlspecialchars($group->name) . '</h3>';
-    html_writer::table($table);
+    echo html_writer::table($table);
 }
 
 echo $OUTPUT->footer();
