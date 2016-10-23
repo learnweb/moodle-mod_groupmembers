@@ -41,6 +41,10 @@ groupmembers_view($groupmembers, $course, $cm, $context);
 echo $OUTPUT->header();
 echo $OUTPUT->heading(format_string($groupmembers->name), 2, null);
 
+if (!empty($groupmembers->intro)) {
+    echo $OUTPUT->box(format_module_intro('forum', $groupmembers, $cm->id), 'generalbox', 'intro');
+}
+
 $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
 
 foreach ($groups as $group) {
