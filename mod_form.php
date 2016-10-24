@@ -41,7 +41,7 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         $mform->addElement('select', 'listgroupingid', get_string('listgrouping', 'groupmembers'), $options);
         $mform->addRule('listgroupingid', null, 'required', null, 'client');
 
-        // Groupings selector - used to select grouping for groups in activity.
+        // E-Mail visibility selector - used to decide whether e-mail adresses should be shown to other users.
         $options = array(
             GROUPMEMBERS_SHOWEMAIL_NO => get_string('showemail:no', 'groupmembers'),
             GROUPMEMBERS_SHOWEMAIL_OWNGROUP => get_string('showemail:owngroup', 'groupmembers'),
