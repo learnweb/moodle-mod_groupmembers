@@ -11,6 +11,13 @@
 defined('MOODLE_INTERNAL') || die;
 
 /**
+ * Define some constants
+ */
+define('GROUPMEMBERS_SHOWEMAIL_NO', 0);
+define('GROUPMEMBERS_SHOWEMAIL_OWNGROUP', 1);
+define('GROUPMEMBERS_SHOWEMAIL_ALLGROUPS', 2);
+
+/**
  * List of features supported in groupmembers module
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed True if module supports feature, false if not, null if doesn't know
@@ -25,7 +32,7 @@ function groupmembers_supports($feature) {
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
         case FEATURE_BACKUP_MOODLE2:          return false;
-        case FEATURE_SHOW_DESCRIPTION:        return false;
+        case FEATURE_SHOW_DESCRIPTION:        return true;
 
         default: return null;
     }

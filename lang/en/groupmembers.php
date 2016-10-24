@@ -11,16 +11,20 @@
 $string['modulename'] = 'Group Members';
 $string['modulenameplural'] = 'Group Members';
 $string['modulename_help'] = 'Use the Group Members module to list the members of all groups in one selected grouping.';
-$string['pluginadministration'] = 'newmodule administration';
-$string['pluginname'] = 'newmodule';
+$string['pluginadministration'] = 'Group Members administration';
+$string['pluginname'] = 'groupmembers';
 $string['nodata'] = 'There is no data to display here.';
 $string['groupmembers:addinstance'] = 'Add a new list of group members';
 $string['groupmembers:view'] = 'View group members';
 $string['groupmembersname'] = 'Name of members list';
-$string['displaymode'] = 'Display mode';
 $string['description'] = 'Description';
-$string['listgrouping'] = 'Show groups of';
-$string['firstname'] = 'First name';
-$string['lastname'] = 'Last name';
-$string['email'] = 'E-mail';
+$string['listgrouping'] = 'Grouping';
+$string['showemail'] = 'Show e-mail addresses';
+$string['showemail:no'] = 'No (use internal messages)';
+$string['showemail:owngroup'] = 'Only for own group';
+$string['showemail:allgroups'] = 'For all groups';
+$string['user:picture'] = 'Picture';
+$string['user:fullname'] = 'First name / Surname';
+$string['user:contact'] = 'Contact';
+$string['sendmessage'] = 'Send message';
 

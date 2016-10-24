@@ -26,6 +26,9 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         $this->standard_intro_elements(get_string('description', 'groupmembers'));
 
+//-------------------------------------------------------------------------------
+        $mform->addElement('header', 'general', get_string('modulename', 'groupmembers'));
+
         // Groupings selector - used to select grouping for groups in activity.
         $options = array();
         if ($groupings = $DB->get_records('groupings', array('courseid'=>$COURSE->id))) {
@@ -37,6 +40,15 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         $options = array(0 => get_string('none')) + $options;
         $mform->addElement('select', 'listgroupingid', get_string('listgrouping', 'groupmembers'), $options);
         $mform->addRule('listgroupingid', null, 'required', null, 'client');
+
+        // Groupings selector - used to select grouping for groups in activity.
+        $options = array(
+            GROUPMEMBERS_SHOWEMAIL_NO => get_string('showemail:no', 'groupmembers'),
+            GROUPMEMBERS_SHOWEMAIL_OWNGROUP => get_string('showemail:owngroup', 'groupmembers'),
+            GROUPMEMBERS_SHOWEMAIL_ALLGROUPS => get_string('showemail:allgroups', 'groupmembers'),
+        );
+        $mform->addElement('select', 'showemail', get_string('showemail', 'groupmembers'), $options);
+        $mform->addRule('showemail', null, 'required', null, 'client');
 
 //-------------------------------------------------------------------------------
         $this->standard_coursemodule_elements();

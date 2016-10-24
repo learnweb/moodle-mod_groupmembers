@@ -50,18 +50,30 @@ $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
 foreach ($groups as $group) {
     $table = new html_table();
     $table->head = array(
-        get_string("lastname", "groupmembers"),
-        get_string("firstname", "groupmembers"),
-        get_string("email", "groupmembers")
+        get_string('user:picture', 'groupmembers'),
+        get_string('user:fullname', 'groupmembers'),
+        get_string('user:contact', 'groupmembers'),
     );
+    $table->size = array('15%', '35%', '50%');
     $table->data = array();
 
     $members = groups_get_members($group->id);
     foreach ($members as $member) {
+        $userurl = new moodle_url('/user/view.php', array('id' => $member->id, 'course' => $cm->id));
+        if ($groupmembers->showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
+            ($groupmembers->showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && groups_is_member($group->id, $USER->id)))
+        {
+            $contacturl = new moodle_url('mailto:' . $member->email);
+            $contacttext = $member->email;
+        }
+        else {
+            $contacturl = new moodle_url('/message/index.php', array('id' => $member->id));
+            $contacttext = get_string('sendmessage', 'groupmembers');
+        }
         $table->data[] = array(
-            $member->lastname,
-            $member->firstname,
-            $member->email
+            $OUTPUT->user_picture($member),
+            html_writer::link($userurl, fullname($member)),
+            html_writer::link($contacturl, $contacttext)
         );
     }
 
