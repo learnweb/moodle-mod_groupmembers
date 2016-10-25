@@ -46,8 +46,15 @@ if (!empty($groupmembers->intro)) {
 }
 
 $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
+$output = false;
 
 foreach ($groups as $group) {
+    // skip group, if user is not in the group and only own groups are to be displayed
+    if ($groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN && !groups_is_member($group->id, $USER->id)) {
+        continue;
+    }
+
+    // generate HTML table with fixed widths
     $table = new html_table();
     $table->head = array(
         get_string('user:picture', 'groupmembers'),
@@ -57,6 +64,7 @@ foreach ($groups as $group) {
     $table->size = array('15%', '35%', '50%');
     $table->data = array();
 
+    // output members
     $members = groups_get_members($group->id);
     foreach ($members as $member) {
         $userurl = new moodle_url('/user/view.php', array('id' => $member->id, 'course' => $cm->id));
@@ -77,8 +85,16 @@ foreach ($groups as $group) {
         );
     }
 
-    echo '<h3>' . htmlspecialchars($group->name) . '</h3>';
+    echo $OUTPUT->heading($group->name, 3, '', 'group-' . $group->id);
     echo html_writer::table($table);
+    $output = true;
+}
+
+if (!$output && $groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN) {
+    echo $OUTPUT->box(get_string('noowngroupsavailable', 'groupmembers'));
+}
+elseif (!$output) {
+    echo $OUTPUT->box(get_string('nogroupsavailable', 'groupmembers'));
 }
 
 echo $OUTPUT->footer();
