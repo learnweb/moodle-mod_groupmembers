@@ -47,14 +47,14 @@ function groupmembers_supports($feature) {
  * @return int new groupmembers instance id
  */
 function groupmembers_add_instance($data, $mform) {
-    global $CFG, $DB;
+    global $DB;
 
     $cmid = $data->coursemodule;
     $data->timemodified = time();
     $data->id = $DB->insert_record('groupmembers', $data);
 
     // we need to use context now, so we need to make sure all needed info is already in db
-    $DB->set_field('course_modules', 'instance', $data->id, array('id'=>$cmid));
+    $DB->set_field('course_modules', 'instance', $data->id, ['id'=>$cmid]); // TODO required? JD
 
     return $data->id;
 }
@@ -66,7 +66,7 @@ function groupmembers_add_instance($data, $mform) {
  * @return bool true
  */
 function groupmembers_update_instance($data, $mform) {
-    global $CFG, $DB;
+    global $DB;
 
     $data->timemodified = time();
     $data->id           = $data->instance;
@@ -83,12 +83,12 @@ function groupmembers_update_instance($data, $mform) {
 function groupmembers_delete_instance($id) {
     global $DB;
 
-    if (!$groupmembers = $DB->get_record('groupmembers', array('id'=>$id))) {
+    if (!$groupmembers = $DB->get_record('groupmembers', ['id' => $id])) {
         return false;
     }
 
     // note: all context files are deleted automatically
-    $DB->delete_records('groupmembers', array('id'=>$groupmembers->id));
+    $DB->delete_records('groupmembers', ['id' => $groupmembers->id ]);
 
     return true;
 }
@@ -103,7 +103,7 @@ function groupmembers_delete_instance($id) {
 function groupmembers_get_groupmembers($groupmembersid) {
     global $DB;
 
-    if ($groupmembers = $DB->get_record("groupmembers", array("id" => $groupmembersid))) {
+    if ($groupmembers = $DB->get_record("groupmembers", ["id" => $groupmembersid])) {
         return $groupmembers;
     }
     return false;
