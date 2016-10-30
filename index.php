@@ -29,9 +29,7 @@ require_once("lib.php");
 $id = required_param('id',PARAM_INT);   // course
 $PAGE->set_url('/mod/groupmembers/index.php', array('id'=>$id));
 
-if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    print_error('invalidcourseid');
-}
+$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
 
 require_course_login($course);
 $PAGE->set_pagelayout('incourse');
@@ -45,17 +43,18 @@ $strplural = get_string("modulenameplural", "groupmembers");
 $PAGE->set_title($strplural);
 $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($strplural);
+
 echo $OUTPUT->header();
+echo $OUTPUT->heading($strplural);
 
 if (! $instances = get_all_instances_in_course("groupmembers", $course)) {
-    notice(get_string('thereareno', 'moodle', $strplural), "../../course/view.php?id=$course->id");
+    notice(get_string('thereareno', 'moodle', $strplural), $CFG->wwwroot."/course/view.php?id=$course->id");
 }
 
-echo '<h1>' . format_string($strplural) . '</h1>';
-echo '<ul>';
+$linklist = array();
 foreach ($instances as $instance) {
-    echo '<li><a href="view.php?id=' . $instance->coursemodule . '">' . format_string($instance->name,true) . '</a></li>';
+    $linklist[] = '<a href="view.php?id=' . $instance->coursemodule . '">' . format_string($instance->name) . '</a>';
 }
-echo '</ul>';
+echo html_writer::alist($linklist);
 
 echo $OUTPUT->footer();
