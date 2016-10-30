@@ -1,10 +1,25 @@
 <?php
+// This file is part of a plugin for
+// Moodle - http://moodle.org/
+//
+// Moodle and this plugin are free software: you can redistribute it
+// and/or modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Definition of groupmembers event handlers
+ * Plugin entrance point: Main page
  *
  * @package    mod_groupmembers
- * @copyright  2016 Dennis Riehle
+ * @copyright  2016 Dennis Riehle, Jan C. Dageförde
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
