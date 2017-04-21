@@ -40,17 +40,27 @@ define('GROUPMEMBERS_SHOWEMAIL_ALLGROUPS', 2);
  */
 function groupmembers_supports($feature) {
     switch($feature) {
-        case FEATURE_MOD_ARCHETYPE:           return MOD_ARCHETYPE_RESOURCE;
-        case FEATURE_GROUPS:                  return false;
-        case FEATURE_GROUPINGS:               return false;
-        case FEATURE_MOD_INTRO:               return true;
-        case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
-        case FEATURE_GRADE_HAS_GRADE:         return false;
-        case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return false;
-        case FEATURE_SHOW_DESCRIPTION:        return true;
+        case FEATURE_MOD_ARCHETYPE:
+return MOD_ARCHETYPE_RESOURCE;
+        case FEATURE_GROUPS:
+return false;
+        case FEATURE_GROUPINGS:
+return false;
+        case FEATURE_MOD_INTRO:
+return true;
+        case FEATURE_COMPLETION_TRACKS_VIEWS:
+return true;
+        case FEATURE_GRADE_HAS_GRADE:
+return false;
+        case FEATURE_GRADE_OUTCOMES:
+return false;
+        case FEATURE_BACKUP_MOODLE2:
+return false;
+        case FEATURE_SHOW_DESCRIPTION:
+return true;
 
-        default: return null;
+        default:
+return null;
     }
 }
 
@@ -68,7 +78,7 @@ function groupmembers_add_instance($data, $mform) {
     $data->id = $DB->insert_record('groupmembers', $data);
 
     // we need to use context now, so we need to make sure all needed info is already in db
-    $DB->set_field('course_modules', 'instance', $data->id, ['id'=>$cmid]); // TODO required? JD
+    $DB->set_field('course_modules', 'instance', $data->id, ['id' => $cmid]); // TODO required? JD
 
     return $data->id;
 }

@@ -26,9 +26,9 @@ require_once(__DIR__. '/../../config.php');
 require_once(__DIR__. '/lib.php');
 
 $id = required_param('id',PARAM_INT);   // course
-$PAGE->set_url('/mod/groupmembers/index.php', array('id'=>$id));
+$PAGE->set_url('/mod/groupmembers/index.php', array('id' => $id));
 
-$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
+$course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 
 require_course_login($course);
 $PAGE->set_pagelayout('incourse');

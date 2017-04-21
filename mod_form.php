@@ -33,10 +33,10 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         $mform    =& $this->_form;
 
-//-------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
-        $mform->addElement('text', 'name', get_string('groupmembersname', 'groupmembers'), array('size'=>'64'));
+        $mform->addElement('text', 'name', get_string('groupmembersname', 'groupmembers'), array('size' => '64'));
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -47,12 +47,12 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         $this->standard_intro_elements(get_string('description', 'groupmembers'));
 
-//-------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
         $mform->addElement('header', 'general', get_string('modulename', 'groupmembers'));
 
         // Groupings selector - used to select grouping for groups in activity.
         $options = array();
-        if ($groupings = $DB->get_records('groupings', array('courseid'=>$COURSE->id))) {
+        if ($groupings = $DB->get_records('groupings', array('courseid' => $COURSE->id))) {
             foreach ($groupings as $grouping) {
                 $options[$grouping->id] = format_string($grouping->name);
             }
@@ -64,7 +64,7 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         // Group visibility selector - used to decide which groups to show in listing
         $options = array(
-            GROUPMEMBERS_SHOWGROUPS_ALL=> get_string('showgroups:all', 'groupmembers'),
+            GROUPMEMBERS_SHOWGROUPS_ALL => get_string('showgroups:all', 'groupmembers'),
             GROUPMEMBERS_SHOWGROUPS_OWN => get_string('showgroups:own', 'groupmembers'),
         );
         $mform->addElement('select', 'showgroups', get_string('showgroups', 'groupmembers'), $options);
@@ -79,9 +79,9 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         $mform->addElement('select', 'showemail', get_string('showemail', 'groupmembers'), $options);
         $mform->addRule('showemail', null, 'required', null, 'client');
 
-//-------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
         $this->standard_coursemodule_elements();
-//-------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
         $this->add_action_buttons();
     }
 }

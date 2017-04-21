@@ -26,7 +26,7 @@ require_once(__DIR__. '/../../config.php');
 require_once(__DIR__. '/lib.php');
 
 $id = required_param('id', PARAM_INT);  // Course Module ID
-$PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', array('id'=>$id)));
+$PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', array('id' => $id)));
 
 // load course module
 if (! $cm = get_coursemodule_from_id('groupmembers', $id)) {
@@ -107,7 +107,7 @@ foreach ($groups as $group) {
 if (!$output && $groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN) {
     echo $OUTPUT->box(get_string('noowngroupsavailable', 'groupmembers'));
 }
-elseif (!$output) {
+else if (!$output) {
     echo $OUTPUT->box(get_string('nogroupsavailable', 'groupmembers'));
 }
 
