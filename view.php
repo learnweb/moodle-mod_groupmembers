@@ -15,15 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin entrance point: Main page
+ * Plugin entrance point: Main page of coursemodule instances
  *
  * @package    mod_groupmembers
  * @copyright  2016 Dennis Riehle, Jan C. Dageförde
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once("../../config.php");
-require_once("lib.php");
+require_once(__DIR__. '/../../config.php');
+require_once(__DIR__. '/lib.php');
 
 $id = required_param('id', PARAM_INT);  // Course Module ID
 $PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', array('id'=>$id)));
