@@ -1,6 +1,5 @@
 <?php
-// This file is part of a plugin for
-// Moodle - http://moodle.org/
+// This file is part of a plugin for Moodle - http://moodle.org/
 //
 // Moodle and this plugin are free software: you can redistribute it
 // and/or modify it under the terms of the GNU General Public License
@@ -26,9 +25,7 @@
 $string['modulename'] = 'Group Members';
 $string['modulenameplural'] = 'Group Members';
 $string['modulename_help'] = 'Use the Group Members module to list the members of all groups in one selected grouping.';
-$string['pluginadministration'] = 'Group Members administration';
 $string['pluginname'] = 'Group Members';
-$string['nodata'] = 'There is no data to display here.';
 $string['groupmembers:addinstance'] = 'Add a new list of group members';
 $string['groupmembers:view'] = 'View group members';
 $string['groupmembersname'] = 'Name of members list';
