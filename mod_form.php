@@ -28,7 +28,7 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
  */
 class mod_groupmembers_mod_form extends moodleform_mod {
 
-    function definition() {
+    protected function definition() {
         global $CFG, $COURSE, $DB;
 
         $mform    =& $this->_form;
