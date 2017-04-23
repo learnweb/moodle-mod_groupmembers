@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
 
-require_once ($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot.'/course/moodleform_mod.php');
 
 /**
  * Settings mod_form for mod_groupmembers
@@ -62,7 +62,7 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         $mform->addElement('select', 'listgroupingid', get_string('listgrouping', 'groupmembers'), $options);
         $mform->addRule('listgroupingid', null, 'required', null, 'client');
 
-        // Group visibility selector - used to decide which groups to show in listing
+        // Group visibility selector - used to decide which groups to show in listing.
         $options = array(
             GROUPMEMBERS_SHOWGROUPS_ALL => get_string('showgroups:all', 'groupmembers'),
             GROUPMEMBERS_SHOWGROUPS_OWN => get_string('showgroups:own', 'groupmembers'),

@@ -25,10 +25,10 @@
 require_once(__DIR__. '/../../config.php');
 require_once(__DIR__. '/lib.php');
 
-$id = required_param('id',PARAM_INT);   // course
+$id = required_param('id', PARAM_INT);   // Course ID.
 $PAGE->set_url('/mod/groupmembers/index.php', array('id' => $id));
 
-$course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
 
 require_course_login($course);
 $PAGE->set_pagelayout('incourse');
@@ -38,7 +38,7 @@ $event = \mod_groupmembers\event\course_module_instance_list_viewed::create($eve
 $event->add_record_snapshot('course', $course);
 $event->trigger();
 
-$strplural = get_string("modulenameplural", "groupmembers");
+$strplural = get_string('modulenameplural', 'groupmembers');
 $PAGE->set_title($strplural);
 $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($strplural);
@@ -46,8 +46,8 @@ $PAGE->navbar->add($strplural);
 echo $OUTPUT->header();
 echo $OUTPUT->heading($strplural);
 
-if (! $instances = get_all_instances_in_course("groupmembers", $course)) {
-    notice(get_string('thereareno', 'moodle', $strplural), $CFG->wwwroot."/course/view.php?id=$course->id");
+if (! $instances = get_all_instances_in_course('groupmembers', $course)) {
+    notice(get_string('thereareno', 'moodle', $strplural), $CFG->wwwroot."/course/view.php?id=$course->id"); // TODO use moodle_url
 }
 
 $linklist = array();

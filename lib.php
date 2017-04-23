@@ -41,33 +41,32 @@ define('GROUPMEMBERS_SHOWEMAIL_ALLGROUPS', 2);
 function groupmembers_supports($feature) {
     switch($feature) {
         case FEATURE_MOD_ARCHETYPE:
-return MOD_ARCHETYPE_RESOURCE;
+            return MOD_ARCHETYPE_RESOURCE;
         case FEATURE_GROUPS:
-return false;
+            return false;
         case FEATURE_GROUPINGS:
-return false;
+            return false;
         case FEATURE_MOD_INTRO:
-return true;
+            return true;
         case FEATURE_COMPLETION_TRACKS_VIEWS:
-return true;
+            return true;
         case FEATURE_GRADE_HAS_GRADE:
-return false;
+            return false;
         case FEATURE_GRADE_OUTCOMES:
-return false;
+            return false;
         case FEATURE_BACKUP_MOODLE2:
-return false;
+            return false;
         case FEATURE_SHOW_DESCRIPTION:
-return true;
-
+            return true;
         default:
-return null;
+            return null;
     }
 }
 
 /**
  * Add groupmembers instance.
- * @param object $data
- * @param object $mform
+ * @param stdClass $data
+ * @param mod_groupmembers_mod_form $mform
  * @return int new groupmembers instance id
  */
 function groupmembers_add_instance($data, $mform) {
@@ -77,7 +76,7 @@ function groupmembers_add_instance($data, $mform) {
     $data->timemodified = time();
     $data->id = $DB->insert_record('groupmembers', $data);
 
-    // we need to use context now, so we need to make sure all needed info is already in db
+    // We need to use context now, so we need to make sure all needed info is already in db.
     $DB->set_field('course_modules', 'instance', $data->id, ['id' => $cmid]); // TODO required? JD
 
     return $data->id;
@@ -85,8 +84,8 @@ function groupmembers_add_instance($data, $mform) {
 
 /**
  * Update groupmembers instance.
- * @param object $data
- * @param object $mform
+ * @param stdClass $data
+ * @param mod_groupmembers_mod_form $mform
  * @return bool true
  */
 function groupmembers_update_instance($data, $mform) {
@@ -111,7 +110,7 @@ function groupmembers_delete_instance($id) {
         return false;
     }
 
-    // note: all context files are deleted automatically
+    // Note: all context files are deleted automatically.
     $DB->delete_records('groupmembers', ['id' => $groupmembers->id ]);
 
     return true;
@@ -122,12 +121,12 @@ function groupmembers_delete_instance($id) {
  *
  * @global object
  * @param int $groupmembersid
- * @return object|bool The groupmembers or false
+ * @return stdClass|bool The groupmembers or false
  */
 function groupmembers_get_groupmembers($groupmembersid) {
     global $DB;
 
-    if ($groupmembers = $DB->get_record("groupmembers", ["id" => $groupmembersid])) {
+    if ($groupmembers = $DB->get_record('groupmembers', ['id' => $groupmembersid])) {
         return $groupmembers;
     }
     return false;

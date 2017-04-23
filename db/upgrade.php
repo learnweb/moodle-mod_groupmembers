@@ -30,11 +30,5 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_groupmembers_upgrade($oldversion) {
-    global $CFG, $DB;
-
-    // $dbman = $DB->get_manager();
-
-    // code may be needed later
-
     return true;
 }

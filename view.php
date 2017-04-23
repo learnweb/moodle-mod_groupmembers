@@ -25,23 +25,23 @@
 require_once(__DIR__. '/../../config.php');
 require_once(__DIR__. '/lib.php');
 
-$id = required_param('id', PARAM_INT);  // Course Module ID
+$id = required_param('id', PARAM_INT);  // Course Module ID.
 $PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', array('id' => $id)));
 
-// load course module
+// Load course module.
 if (! $cm = get_coursemodule_from_id('groupmembers', $id)) {
     print_error('invalidcoursemodule');
 }
 
-// load corresponding course
-if (! $course = $DB->get_record("course", array("id" => $cm->course))) {
+// Load corresponding course.
+if (! $course = $DB->get_record('course', array('id' => $cm->course))) {
     print_error('coursemisconf');
 }
 
 require_course_login($course, false, $cm);
 $context = context_module::instance($cm->id);
 
-// load groupmembers object
+// Load groupmembers object.
 if (! $groupmembers = groupmembers_get_groupmembers($cm->instance)) {
     print_error('invalidcoursemodule');
 }
@@ -63,12 +63,12 @@ $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
 $output = false;
 
 foreach ($groups as $group) {
-    // skip group, if user is not in the group and only own groups are to be displayed
+    // Skip group, if user is not in the group and only own groups are to be displayed.
     if ($groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN && !groups_is_member($group->id, $USER->id)) {
         continue;
     }
 
-    // generate HTML table with fixed widths
+    // Generate HTML table with fixed widths.
     $table = new html_table();
     $table->head = array(
         get_string('user:picture', 'groupmembers'),
@@ -78,17 +78,15 @@ foreach ($groups as $group) {
     $table->size = array('15%', '35%', '50%');
     $table->data = array();
 
-    // output members
+    // Output members.
     $members = groups_get_members($group->id);
     foreach ($members as $member) {
         $userurl = new moodle_url('/user/view.php', array('id' => $member->id, 'course' => $cm->id));
         if ($groupmembers->showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
-            ($groupmembers->showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && groups_is_member($group->id, $USER->id)))
-        {
+            ($groupmembers->showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && groups_is_member($group->id, $USER->id))) {
             $contacturl = new moodle_url('mailto:' . $member->email);
             $contacttext = $member->email;
-        }
-        else {
+        } else {
             $contacturl = new moodle_url('/message/index.php', array('id' => $member->id));
             $contacttext = get_string('sendmessage', 'groupmembers');
         }
@@ -106,8 +104,7 @@ foreach ($groups as $group) {
 
 if (!$output && $groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN) {
     echo $OUTPUT->box(get_string('noowngroupsavailable', 'groupmembers'));
-}
-else if (!$output) {
+} else if (!$output) {
     echo $OUTPUT->box(get_string('nogroupsavailable', 'groupmembers'));
 }
 
