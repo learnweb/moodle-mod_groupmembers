@@ -27,6 +27,7 @@ $string['modulename'] = 'Group Members';
 $string['modulenameplural'] = 'Group Members';
 $string['modulename_help'] = 'Use the Group Members module to list the members of all groups in one selected grouping.';
 $string['pluginname'] = 'Group Members';
+$string['pluginadministration'] = 'Group Members administration';
 $string['groupmembers:addinstance'] = 'Add a new list of group members';
 $string['groupmembers:view'] = 'View group members';
 $string['groupmembersname'] = 'Name of members list';
