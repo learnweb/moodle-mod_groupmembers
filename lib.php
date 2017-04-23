@@ -69,15 +69,11 @@ function groupmembers_supports($feature) {
  * @param mod_groupmembers_mod_form $mform
  * @return int new groupmembers instance id
  */
-function groupmembers_add_instance($data, $mform) {
+function groupmembers_add_instance(stdClass $data, mod_groupmembers_mod_form $mform) {
     global $DB;
 
-    $cmid = $data->coursemodule;
     $data->timemodified = time();
     $data->id = $DB->insert_record('groupmembers', $data);
-
-    // We need to use context now, so we need to make sure all needed info is already in db.
-    $DB->set_field('course_modules', 'instance', $data->id, ['id' => $cmid]); // TODO required? JD
 
     return $data->id;
 }
