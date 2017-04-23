@@ -47,12 +47,16 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($strplural);
 
 if (! $instances = get_all_instances_in_course('groupmembers', $course)) {
-    notice(get_string('thereareno', 'moodle', $strplural), $CFG->wwwroot."/course/view.php?id=$course->id"); // TODO use moodle_url
+    notice(get_string('thereareno', 'moodle', $strplural),
+        new moodle_url('/course/view.php', ['id' => $course->id]));
 }
+
+
 
 $linklist = array();
 foreach ($instances as $instance) {
-    $linklist[] = '<a href="view.php?id=' . $instance->coursemodule . '">' . format_string($instance->name) . '</a>';
+    $linklist[] = html_writer::link(new moodle_url('/mod/groupmembers/view.php', ['id' => $instance->coursemodule]),
+        $instance->name);
 }
 echo html_writer::alist($linklist);
 
