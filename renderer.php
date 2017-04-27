@@ -16,6 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 require_once(__DIR__. '/lib.php');
+require_once($CFG->libdir. '/weblib.php');
 
 class mod_groupmembers_renderer extends plugin_renderer_base {
     public function render_allgroups(array $groups, $showemail) {
@@ -31,7 +32,7 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                 if ($USER->id != $member->id) {
                     if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
                         ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
-                        $memberemail = $member->email;
+                        $memberemail = obfuscate_email($member->email);
                     }
                     if (!empty($CFG->messaging) &&
                         has_capability('moodle/site:sendmessage', \context_system::instance())) {
