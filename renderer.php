@@ -18,7 +18,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once(__DIR__. '/lib.php');
 
 class mod_groupmembers_renderer extends plugin_renderer_base {
-    public function render_allgroups(array $groups, $showemail, $context) {
+    public function render_allgroups(array $groups, $showemail) {
         global $USER, $COURSE, $CFG;
         $data = array(
             'groups' => []
@@ -27,13 +27,16 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
             $members = array();
             foreach ($group['members'] as $member) {
                 $memberemail = null;
-                if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
-                    ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
-                    $memberemail = $member->email;
-                }
                 $membermessage = null;
-                if (!empty($CFG->messaging) && $USER->id != $member->id && has_capability('moodle/site:sendmessage', $context)) {
-                    $membermessage = new moodle_url('/message/index.php', ['id' => $member->id]);
+                if ($USER->id != $member->id) {
+                    if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
+                        ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
+                        $memberemail = $member->email;
+                    }
+                    if (!empty($CFG->messaging) &&
+                        has_capability('moodle/site:sendmessage', \context_system::instance())) {
+                        $membermessage = new moodle_url('/message/index.php', ['id' => $member->id]);
+                    }
                 }
 
                 $members[] = array(

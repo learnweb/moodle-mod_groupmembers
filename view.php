@@ -61,8 +61,8 @@ if (!empty($groupmembers->intro)) {
 
 $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
 
-$groupsandmembers = array();
 // Collect applicable groups and their members.
+$groupsandmembers = array();
 foreach ($groups as $group) {
     // Skip group, if user is not in the group and only own groups are to be displayed.
     $ismember = groups_is_member($group->id, $USER->id);
@@ -88,7 +88,7 @@ if (count($groupsandmembers) == 0) {
 } else {
     /** @var mod_groupmembers_renderer $renderer */
     $renderer = $PAGE->get_renderer('mod_groupmembers');
-    echo $renderer->render_allgroups($groupsandmembers, $groupmembers->showemail, $context);
+    echo $renderer->render_allgroups($groupsandmembers, $groupmembers->showemail);
 }
 
 echo $OUTPUT->footer();
