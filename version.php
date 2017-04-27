@@ -18,7 +18,8 @@
  * Plugin definition
  *
  * @package    mod_groupmembers
- * @copyright  2016 Dennis Riehle, Jan C. Dageförde
+ * @copyright  2017 Dennis M. Riehle, WWU Münster
+ * @copyright  2017 Jan C. Dageförde, WWU Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

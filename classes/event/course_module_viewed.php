@@ -21,7 +21,8 @@ defined('MOODLE_INTERNAL') || die();
  * The mod_groupmembers course module viewed event class.
  *
  * @package    mod_groupmembers
- * @copyright  2016 Dennis Riehle
+ * @copyright  2017 Dennis M. Riehle, WWU Münster
+ * @copyright  2017 Jan C. Dageförde, WWU Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_module_viewed extends \core\event\course_module_viewed {
