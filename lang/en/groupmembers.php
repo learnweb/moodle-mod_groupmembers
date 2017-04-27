@@ -43,7 +43,6 @@ $string['showemail:allgroups'] = 'For all groups';
 $string['user:picture'] = 'Picture';
 $string['user:fullname'] = 'First name / Surname';
 $string['user:contact'] = 'Contact';
-$string['sendmessage'] = 'Send message';
 $string['noowngroupsavailable'] = 'You are currently not assigned to any group.';
 $string['nogroupsavailable'] = 'There are currently no groups to be displayed.';
 

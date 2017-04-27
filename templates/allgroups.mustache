@@ -36,8 +36,15 @@
         <td>
             <div class="btn-group">
             {{! TODO addcontact -- cf. lib/outputrenderers.php \core_renderer::render_context_header:4206 }}
-            {{#messageurl}}<a href="{{{.}}}" role="button" class="btn"><span>{{#pix}}t/message,moodle,{{#str}}sendmessage, groupmembers{{/str}}{{/pix}}</span> {{#str}}sendmessage, groupmembers{{/str}}</a>{{/messageurl}}
-            {{#mail}}<a href="mailto:{{.}}" role="button" class="btn">{{.}}</a>{{/mail}}
+            {{#messageurl}}
+                <a href="{{{.}}}" role="button" class="btn">
+                    <span>{{#pix}}t/message,moodle,{{#str}}message, message{{/str}}{{/pix}}</span>
+                    {{#str}}message, message{{/str}}
+                </a>
+            {{/messageurl}}
+            {{#mail}}
+                <a href="mailto:{{.}}" role="button" class="btn">{{.}}</a>
+            {{/mail}}
             </div>
         </td>
     </tr>
