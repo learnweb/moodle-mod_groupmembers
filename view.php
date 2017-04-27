@@ -60,52 +60,35 @@ if (!empty($groupmembers->intro)) {
 }
 
 $groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
-$output = false;
 
+$groupsandmembers = array();
+// Collect applicable groups and their members.
 foreach ($groups as $group) {
     // Skip group, if user is not in the group and only own groups are to be displayed.
-    if ($groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN && !groups_is_member($group->id, $USER->id)) {
+    $ismember = groups_is_member($group->id, $USER->id);
+    if ($groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN && !$ismember) {
         continue;
     }
 
-    // Generate HTML table with fixed widths.
-    $table = new html_table();
-    $table->head = array(
-        get_string('user:picture', 'groupmembers'),
-        get_string('user:fullname', 'groupmembers'),
-        get_string('user:contact', 'groupmembers'),
-    );
-    $table->size = array('15%', '35%', '50%');
-    $table->data = array();
-
-    // Output members.
+    // Get members of group.
     $members = groups_get_members($group->id);
-    foreach ($members as $member) {
-        $userurl = new moodle_url('/user/view.php', array('id' => $member->id, 'course' => $cm->id));
-        if ($groupmembers->showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
-            ($groupmembers->showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && groups_is_member($group->id, $USER->id))) {
-            $contacturl = new moodle_url('mailto:' . $member->email);
-            $contacttext = $member->email;
-        } else {
-            $contacturl = new moodle_url('/message/index.php', array('id' => $member->id));
-            $contacttext = get_string('sendmessage', 'groupmembers');
-        }
-        $table->data[] = array(
-            $OUTPUT->user_picture($member),
-            html_writer::link($userurl, fullname($member)),
-            html_writer::link($contacturl, $contacttext)
-        );
-    }
-
-    echo $OUTPUT->heading($group->name, 3, '', 'group-' . $group->id);
-    echo html_writer::table($table);
-    $output = true;
+    $groupsandmembers[] = array(
+        'group' => $group,
+        'members' => $members,
+        'ismember' => $ismember
+    );
 }
 
-if (!$output && $groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN) {
-    echo $OUTPUT->box(get_string('noowngroupsavailable', 'groupmembers'));
-} else if (!$output) {
-    echo $OUTPUT->box(get_string('nogroupsavailable', 'groupmembers'));
+if (count($groupsandmembers) == 0) {
+    if ($groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN) {
+        echo $OUTPUT->box(get_string('noowngroupsavailable', 'groupmembers'));
+    } else {
+        echo $OUTPUT->box(get_string('nogroupsavailable', 'groupmembers'));
+    }
+} else {
+    /** @var mod_groupmembers_renderer $renderer */
+    $renderer = $PAGE->get_renderer('mod_groupmembers');
+    echo $renderer->render_allgroups($groupsandmembers, $groupmembers->showemail, $context);
 }
 
 echo $OUTPUT->footer();
