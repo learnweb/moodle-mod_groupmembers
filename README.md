@@ -1,4 +1,4 @@
-# ![moodle-mod_groupmembers](pix/icon.svg) Resource Module: Group Members *(release_candidate)* 
+# ![moodle-mod_groupmembers](pix/icon.png) Resource Module: Group Members *(release_candidate)* 
 [![Build Status](https://travis-ci.org/learnweb/moodle-mod_groupmembers.svg?branch=master)](https://travis-ci.org/learnweb/moodle-mod_groupmembers)
 [![codecov](https://codecov.io/gh/learnweb/moodle-mod_groupmembers/branch/master/graph/badge.svg)](https://codecov.io/gh/learnweb/moodle-mod_groupmembers)
 
