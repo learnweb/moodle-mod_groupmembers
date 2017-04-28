@@ -42,9 +42,9 @@
                     {{#str}}message, message{{/str}}
                 </a>
             {{/messageurl}}
-            {{#mail}}
-                <a href="mailto:{{.}}" role="button" class="btn">{{.}}</a>
-            {{/mail}}
+            {{#maillink}}
+                <a href="mailto:{{.}}" role="button" class="btn">{{{mailtext}}}</a>
+            {{/maillink}}
             </div>
         </td>
     </tr>

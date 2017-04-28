@@ -37,11 +37,13 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
             $members = array();
             foreach ($group['members'] as $member) {
                 $memberemail = null;
+                $memberemailtext = null;
                 $membermessage = null;
                 if ($USER->id != $member->id) {
                     if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
                         ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
                         $memberemail = obfuscate_email($member->email);
+                        $memberemailtext = obfuscate_text($member->email);
                     }
                     if (!empty($CFG->messaging) &&
                         has_capability('moodle/site:sendmessage', \context_system::instance())) {
@@ -53,7 +55,8 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                     'id' => $member->id,
                     'picture' => $this->output->user_picture($member),
                     'displayname' => fullname($member),
-                    'mail' => $memberemail,
+                    'maillink' => $memberemail,
+                    'mailtext' => $memberemailtext,
                     'profileurl' => new moodle_url('/user/view.php', ['id' => $member->id, 'course' => $COURSE->id]),
                     'messageurl' => $membermessage
                 );
