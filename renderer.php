@@ -38,12 +38,17 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
             foreach ($group['members'] as $member) {
                 $memberemail = null;
                 $memberemailtext = null;
+                $memberemailhidden = null;
                 $membermessage = null;
                 if ($USER->id != $member->id) {
-                    if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
-                        ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
+                    if ($member->maildisplay != core_user::MAILDISPLAY_HIDE &&
+                        ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
+                        ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember']))) {
                         $memberemail = obfuscate_email($member->email);
                         $memberemailtext = obfuscate_text($member->email);
+                    }
+                    if ($member->maildisplay == core_user::MAILDISPLAY_HIDE) {
+                        $memberemailhidden = true;
                     }
                     if (!empty($CFG->messaging) &&
                         has_capability('moodle/site:sendmessage', \context_system::instance())) {
@@ -57,6 +62,7 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                     'displayname' => fullname($member),
                     'maillink' => $memberemail,
                     'mailtext' => $memberemailtext,
+                    'mailhidden' => $memberemailhidden,
                     'profileurl' => new moodle_url('/user/view.php', ['id' => $member->id, 'course' => $COURSE->id]),
                     'messageurl' => $membermessage
                 );

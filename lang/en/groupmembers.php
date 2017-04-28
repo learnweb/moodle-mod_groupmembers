@@ -44,4 +44,4 @@ $string['user:fullname'] = 'First name / Surname';
 $string['user:contact'] = 'Contact';
 $string['noowngroupsavailable'] = 'You are currently not assigned to any group.';
 $string['nogroupsavailable'] = 'There are currently no groups to be displayed.';
-
+$string['mailhidden'] = 'Mail contact disabled';

@@ -42,6 +42,9 @@
                     {{#str}}message, message{{/str}}
                 </a>
             {{/messageurl}}
+            {{#mailhidden}}
+                <span role="button" class="btn disabled">{{#str}}mailhidden, mod_groupmembers{{/str}}</a>
+            {{/mailhidden}}
             {{#maillink}}
                 <a href="mailto:{{.}}" role="button" class="btn">{{{mailtext}}}</a>
             {{/maillink}}
