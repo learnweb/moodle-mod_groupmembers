@@ -48,6 +48,8 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                         $memberemailtext = obfuscate_text($member->email);
                     }
                     if ($member->maildisplay == core_user::MAILDISPLAY_HIDE) {
+                        // Email address should not be rendered unless user has at least enabled display
+                        // to course members.
                         $memberemailhidden = true;
                     }
                     if (!empty($CFG->messaging) &&

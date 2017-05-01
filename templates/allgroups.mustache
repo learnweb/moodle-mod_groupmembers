@@ -43,11 +43,11 @@
                 </a>
             {{/messageurl}}
             {{#mailhidden}}
-                <span role="button" class="btn disabled">{{#str}}mailhidden, mod_groupmembers{{/str}}</a>
+                <span role="button" class="btn disabled">{{#str}}mailhidden, mod_groupmembers{{/str}}</span>
             {{/mailhidden}}
-            {{#maillink}}
-                <a href="mailto:{{.}}" role="button" class="btn">{{{mailtext}}}</a>
-            {{/maillink}}
+            {{^mailhidden}}
+                <a href="mailto:{{maillink}}" role="button" class="btn">{{{mailtext}}}</a>
+            {{/mailhidden}}
             </div>
         </td>
     </tr>
