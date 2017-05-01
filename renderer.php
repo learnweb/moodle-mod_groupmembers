@@ -38,19 +38,18 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
             foreach ($group['members'] as $member) {
                 $memberemail = null;
                 $memberemailtext = null;
-                $memberemailhidden = null;
+                $memberemailhidden = false;
                 $membermessage = null;
                 if ($USER->id != $member->id) {
-                    if ($member->maildisplay != core_user::MAILDISPLAY_HIDE &&
-                        ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
-                        ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember']))) {
-                        $memberemail = obfuscate_email($member->email);
-                        $memberemailtext = obfuscate_text($member->email);
-                    }
+
                     if ($member->maildisplay == core_user::MAILDISPLAY_HIDE) {
                         // Email address should not be rendered unless user has at least enabled display
                         // to course members.
                         $memberemailhidden = true;
+                    } else if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
+                        ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
+                        $memberemail = obfuscate_email($member->email);
+                        $memberemailtext = obfuscate_text($member->email);
                     }
                     if (!empty($CFG->messaging) &&
                         has_capability('moodle/site:sendmessage', \context_system::instance())) {
