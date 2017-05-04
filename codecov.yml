@@ -1,2 +1,12 @@
 fixes:
-	- "moodle/mod/groupmembers/::"
+  - "moodle/mod/groupmembers/::"
+
+ignore:
+  # artificial/Moodle API files
+  - "tests/**/*"
+  - "lang/**/*"
+  - "db/**/*"
+  - "version.php"
+  # entry points (consider Behat instead)
+  - "index.php"
+  - "view.php"
