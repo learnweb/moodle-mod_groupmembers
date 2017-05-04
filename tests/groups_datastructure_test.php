@@ -25,82 +25,178 @@
  */
 class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
 
+    /**
+     * Test pair:
+     * - show only own groups
+     * - show regardless of grouping
+     */
     public function test_only_own_nogrouping() {
         $this->resetAfterTest();
-        //create course
-        //create users
-        //create enrolments
-        //create groups
+        $dg = static::getDataGenerator();
 
-        //call .\groups::get_groups_and_members (no grouping), assert empty
+        // Create course.
+        $course = $dg->create_course();
 
-        //add user to group
+        // Create users and enrol.
+        $user1 = $dg->create_user();
+        $user2 = $dg->create_user();
+        $dg->enrol_user($user1->id, $course->id);
+        $dg->enrol_user($user2->id, $course->id);
 
-        //call .\groups::get_groups_and_members (no grouping), assert 1 group
+        // Create groups and groupings.
+        $group1 = $dg->create_group(['courseid' => $course->id]);
+        $group2 = $dg->create_group(['courseid' => $course->id]);
+        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
 
-        //assertTrue ismember on single group
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, true));
 
+        // Add user to group.
+        $dg->create_group_member(['userid' => $user1->id, 'groupid' => $group1->id]);
 
-        $this->assertTrue(true);
+        $result = \mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, true);
+        static::assertCount(1, $result);
+        static::assertTrue($result[0]['ismember']);
     }
 
+    /**
+     * Test pair:
+     * - show only own groups
+     * - limit to particular grouping
+     */
     public function test_only_own_withgrouping() {
         $this->resetAfterTest();
-        //create course
-        //create users
-        //create enrolments
-        //create groups
+        $dg = static::getDataGenerator();
 
-        //call .\groups::get_groups_and_members (with grouping), assert empty
+        // Create course.
+        $course = $dg->create_course();
 
-        //add user to group
+        // Create users and enrol.
+        $user1 = $dg->create_user();
+        $user2 = $dg->create_user();
+        $dg->enrol_user($user1->id, $course->id);
+        $dg->enrol_user($user2->id, $course->id);
 
-        //call .\groups::get_groups_and_members (with grouping), assert empty
+        // Create groups and groupings.
+        $group1 = $dg->create_group(['courseid' => $course->id]);
+        $group2 = $dg->create_group(['courseid' => $course->id]);
+        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
+        $grouping2 = $dg->create_grouping(['courseid' => $course->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
 
-        //add group to grouping
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping1->id, $user1->id, true));
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, true));
 
-        //call .\groups::get_groups_and_members (with grouping), assert 1 group
+        // Add user to group.
+        $dg->create_group_member(['userid' => $user1->id, 'groupid' => $group1->id]);
 
-        //assertTrue ismember on single group
-
-        $this->assertTrue(true);
+        $result = \mod_groupmembers\groups::get_groups_and_members($course->id, $grouping1->id, $user1->id, true);
+        static::assertCount(1, $result);
+        static::assertTrue($result[0]['ismember']);
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, true));
     }
+
+    /**
+     * Test pair:
+     * - show all groups
+     * - show regardless of grouping
+     */
     public function test_all_nogrouping() {
         $this->resetAfterTest();
-        //create course
-        //create users
-        //create enrolments
-        //create groups
+        $dg = static::getDataGenerator();
 
-        //call .\groups::get_groups_and_members (no grouping), assert all groups
-        //assertFalse ismember on all groups
+        // Create course.
+        $course = $dg->create_course();
 
-        //add user to group
+        // Create users and enrol.
+        $user1 = $dg->create_user();
+        $user2 = $dg->create_user();
+        $dg->enrol_user($user1->id, $course->id);
+        $dg->enrol_user($user2->id, $course->id);
 
-        //call .\groups::get_groups_and_members (no grouping), assert all groups
-        //assertTrue ismember on 1 groups
-        $this->assertTrue(false);
+        // Create groups and groupings.
+        $group1 = $dg->create_group(['courseid' => $course->id]);
+        $group2 = $dg->create_group(['courseid' => $course->id]);
+        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
+
+        $res1 = \mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, false);
+        static::assertCount(2, $res1);
+        foreach ($res1 as $group) {
+            self::assertFalse($group['ismember']);
+        }
+
+        // Add user to group.
+        $dg->create_group_member(['userid' => $user1->id, 'groupid' => $group1->id]);
+
+        $res2 = \mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, false);
+        static::assertCount(2, $res2);
+        foreach ($res2 as $group) {
+            if ($group['group']->id == $group1->id) {
+                self::assertTrue($group['ismember']);
+            } else {
+                self::assertFalse($group['ismember']);
+            }
+        }
+
     }
 
+    /**
+     * Test pair:
+     * - show all groups
+     * - limit to particular grouping
+     */
     public function test_all_withgrouping() {
+
+
         $this->resetAfterTest();
-        //create course
-        //create users
-        //create enrolments
-        //create groups
+        $dg = static::getDataGenerator();
 
-        //call .\groups::get_groups_and_members (with grouping), assert empty
+        // Create course.
+        $course = $dg->create_course();
 
-        //add group to grouping
+        // Create users and enrol.
+        $user1 = $dg->create_user();
+        $user2 = $dg->create_user();
+        $dg->enrol_user($user1->id, $course->id);
+        $dg->enrol_user($user2->id, $course->id);
 
-        //call .\groups::get_groups_and_members (with grouping), assert 1 group
-        //assertFalse ismember
+        // Create groups and groupings.
+        $group1 = $dg->create_group(['courseid' => $course->id]);
+        $group2 = $dg->create_group(['courseid' => $course->id]);
+        $group3 = $dg->create_group(['courseid' => $course->id]);
+        $group4 = $dg->create_group(['courseid' => $course->id]);
+        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
+        $grouping2 = $dg->create_grouping(['courseid' => $course->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
 
-        //add user to group
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, false));
 
-        //call .\groups::get_groups_and_members (no grouping), assert 1 group
-        //assertTrue ismember
+        // Add group to grouping
+        $dg->create_grouping_group(['groupingid' => $grouping2->id, 'groupid' => $group3->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping2->id, 'groupid' => $group4->id]);
 
-        $this->assertTrue(false);
+        $res1 = \mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, false);
+        static::assertCount(2, $res1);
+        foreach ($res1 as $group) {
+            self::assertFalse($group['ismember']);
+        }
+
+        // Add user to group.
+        $dg->create_group_member(['userid' => $user1->id, 'groupid' => $group3->id]);
+
+        $res2 = \mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, false);
+        static::assertCount(2, $res2);
+        foreach ($res2 as $group) {
+            if ($group['group']->id == $group3->id) {
+                self::assertTrue($group['ismember']);
+            } else {
+                self::assertFalse($group['ismember']);
+            }
+        }
     }
 }
