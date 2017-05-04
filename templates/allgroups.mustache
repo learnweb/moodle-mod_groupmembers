@@ -21,8 +21,8 @@
 
 }}
 {{#groups}}
-<h3 id="groupmembers-group-{{id}}">{{name}}</h3>
-<table class="generaltable">
+<h3 id="groupmembers-group-{{id}}"{{#ismember}} class="ismember"{{/ismember}}>{{name}}</h3>
+<table class="generaltable{{#ismember}} ismember{{/ismember}}" id="groupmembers-group-{{id}}-members">
     <thead>
     <tr>
         <th style="width: 50%">{{#str}}user:fullname, mod_groupmembers{{/str}}</th>

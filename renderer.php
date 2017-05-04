@@ -73,6 +73,7 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                 'id' => $group['group']->id,
                 'name' => $group['group']->name,
                 'members' => $members,
+                'ismember' => $group['ismember']
             );
         }
         return $this->render_from_template('mod_groupmembers/allgroups', $data);
