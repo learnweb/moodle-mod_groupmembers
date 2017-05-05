@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Test logic used by the renderer whether to show/hide particular elements
  *
@@ -150,8 +152,6 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
      * - limit to particular grouping
      */
     public function test_all_withgrouping() {
-
-
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
 
@@ -176,7 +176,7 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
 
         static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, false));
 
-        // Add group to grouping
+        // Add group to grouping.
         $dg->create_grouping_group(['groupingid' => $grouping2->id, 'groupid' => $group3->id]);
         $dg->create_grouping_group(['groupingid' => $grouping2->id, 'groupid' => $group4->id]);
 

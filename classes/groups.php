@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_groupmembers;
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Static methods for collecting relevant groups and members
