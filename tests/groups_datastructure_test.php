@@ -35,7 +35,7 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
 
-        list($userid, $courseid, $groupid) = static::prepare_nogrouping($dg);
+        list($courseid, $userid, $groupid) = static::prepare_nogrouping($dg);
 
         static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, true));
 
@@ -55,34 +55,20 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
     public function test_only_own_withgrouping() {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
+        list($courseid, $userid, $groupid, $groupingid) = $this->prepare_nogrouping($dg);
 
-        // Create course.
-        $course = $dg->create_course();
+        $grouping2 = $dg->create_grouping(['courseid' => $courseid]);
 
-        // Create users and enrol.
-        $user1 = $dg->create_user();
-        $user2 = $dg->create_user();
-        $dg->enrol_user($user1->id, $course->id);
-        $dg->enrol_user($user2->id, $course->id);
-
-        // Create groups and groupings.
-        $group1 = $dg->create_group(['courseid' => $course->id]);
-        $group2 = $dg->create_group(['courseid' => $course->id]);
-        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
-        $grouping2 = $dg->create_grouping(['courseid' => $course->id]);
-        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
-        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
-
-        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping1->id, $user1->id, true));
-        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, true));
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($courseid, $groupingid, $userid, true));
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($courseid, $grouping2->id, $userid, true));
 
         // Add user to group.
-        $dg->create_group_member(['userid' => $user1->id, 'groupid' => $group1->id]);
+        $dg->create_group_member(['userid' => $userid, 'groupid' => $groupid]);
 
-        $result = \mod_groupmembers\groups::get_groups_and_members($course->id, $grouping1->id, $user1->id, true);
+        $result = \mod_groupmembers\groups::get_groups_and_members($courseid, $groupingid, $userid, true);
         static::assertCount(1, $result);
         static::assertTrue($result[0]['ismember']);
-        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, $grouping2->id, $user1->id, true));
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($courseid, $grouping2->id, $userid, true));
     }
 
     /**
@@ -93,7 +79,7 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
     public function test_all_nogrouping() {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
-        list($userid, $courseid, $groupid) = $this->prepare_nogrouping($dg);
+        list($courseid, $userid, $groupid) = $this->prepare_nogrouping($dg);
 
         $res1 = \mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, false);
         static::assertCount(2, $res1);
@@ -187,6 +173,6 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
         $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
         $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
 
-        return [$course->id, $user1->id, $group1->id];
+        return [$course->id, $user1->id, $group1->id, $grouping1->id];
     }
 }
