@@ -53,6 +53,7 @@ $PAGE->set_heading($course->fullname);
 // Completion and trigger event.
 groupmembers_view($groupmembers, $course, $cm, $context);
 
+// Theme and module header/intro.
 echo $OUTPUT->header();
 echo $OUTPUT->heading(format_string($groupmembers->name), 2, null);
 
@@ -60,27 +61,12 @@ if (!empty($groupmembers->intro)) {
     echo $OUTPUT->box(format_module_intro('groupmembers', $groupmembers, $cm->id), 'generalbox', 'intro');
 }
 
-$groups = groups_get_all_groups($course->id, 0, $groupmembers->listgroupingid);
-
 // Collect applicable groups and their members.
-$groupsandmembers = array();
-foreach ($groups as $group) {
-    // Skip group, if user is not in the group and only own groups are to be displayed.
-    $ismember = groups_is_member($group->id, $USER->id);
-    if ($groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN && !$ismember) {
-        continue;
-    }
+$groupsandmembers = \mod_groupmembers\groups::get_groups_and_members($course->id, $groupmembers->listgroupingid,
+    $USER->id, $groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN);
 
-    // Get members of group.
-    $members = groups_get_members($group->id);
-    $groupsandmembers[] = array(
-        'group' => $group,
-        'members' => $members,
-        'ismember' => $ismember
-    );
-}
-
-if (count($groupsandmembers) == 0) {
+// Output special texts if no group was retrieved; otherwise render list.
+if (count($groupsandmembers) === 0) {
     if ($groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN) {
         echo $OUTPUT->box(get_string('noowngroupsavailable', 'groupmembers'));
     } else {
@@ -92,4 +78,5 @@ if (count($groupsandmembers) == 0) {
     echo $renderer->render_allgroups($groupsandmembers, $groupmembers->showemail);
 }
 
+// Theme footer.
 echo $OUTPUT->footer();

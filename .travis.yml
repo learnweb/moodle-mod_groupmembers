@@ -11,10 +11,13 @@ php:
  - 7.0
  - 7.1
 
-matrix:
-  allow_failures:
-    - env: DB=pgsql MOODLE_BRANCH=master
-    - env: DB=mysqli MOODLE_BRANCH=master
+addons:
+  postgresql: 9.3
+
+#matrix:
+#  allow_failures:
+#    - env: DB=pgsql MOODLE_BRANCH=master
+#    - env: DB=mysqli MOODLE_BRANCH=master
 
 env:
  global:
