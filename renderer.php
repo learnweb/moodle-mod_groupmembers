@@ -41,16 +41,17 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                 $memberemailhidden = false;
                 $membermessage = null;
                 if ($USER->id != $member->id) {
-
                     if ($member->maildisplay == core_user::MAILDISPLAY_HIDE) {
-                        // Email address should not be rendered unless user has at least enabled display
-                        // to course members.
+                        // Email address should not be rendered unless user has at least enabled display to course members.
+                        // User has chosen not to reveal an email address. This can be made explicit by the template.
                         $memberemailhidden = true;
                     } else if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
                         ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
+                        // Since user allows showing, the final decision is up to the module's settings ($showemail).
                         $memberemail = obfuscate_email($member->email);
                         $memberemailtext = obfuscate_text($member->email);
                     }
+
                     if (!empty($CFG->messaging) &&
                         has_capability('moodle/site:sendmessage', \context_system::instance())) {
                         $membermessage = new moodle_url('/message/index.php', ['id' => $member->id]);

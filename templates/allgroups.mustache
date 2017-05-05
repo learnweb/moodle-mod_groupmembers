@@ -45,9 +45,9 @@
             {{#mailhidden}}
                 <span role="button" class="btn disabled">{{#str}}mailhidden, mod_groupmembers{{/str}}</span>
             {{/mailhidden}}
-            {{^mailhidden}}
+            {{#maillink}}
                 <a href="mailto:{{maillink}}" role="button" class="btn">{{{mailtext}}}</a>
-            {{/mailhidden}}
+            {{/maillink}}
             </div>
         </td>
     </tr>
