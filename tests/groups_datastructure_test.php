@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -36,28 +35,14 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
 
-        // Create course.
-        $course = $dg->create_course();
+        list($userid, $courseid, $groupid) = static::prepare_nogrouping($dg);
 
-        // Create users and enrol.
-        $user1 = $dg->create_user();
-        $user2 = $dg->create_user();
-        $dg->enrol_user($user1->id, $course->id);
-        $dg->enrol_user($user2->id, $course->id);
-
-        // Create groups and groupings.
-        $group1 = $dg->create_group(['courseid' => $course->id]);
-        $group2 = $dg->create_group(['courseid' => $course->id]);
-        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
-        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
-        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
-
-        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, true));
+        static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, true));
 
         // Add user to group.
-        $dg->create_group_member(['userid' => $user1->id, 'groupid' => $group1->id]);
+        $dg->create_group_member(['userid' => $userid, 'groupid' => $groupid]);
 
-        $result = \mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, true);
+        $result = \mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, true);
         static::assertCount(1, $result);
         static::assertTrue($result[0]['ismember']);
     }
@@ -108,36 +93,21 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
     public function test_all_nogrouping() {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
+        list($userid, $courseid, $groupid) = $this->prepare_nogrouping($dg);
 
-        // Create course.
-        $course = $dg->create_course();
-
-        // Create users and enrol.
-        $user1 = $dg->create_user();
-        $user2 = $dg->create_user();
-        $dg->enrol_user($user1->id, $course->id);
-        $dg->enrol_user($user2->id, $course->id);
-
-        // Create groups and groupings.
-        $group1 = $dg->create_group(['courseid' => $course->id]);
-        $group2 = $dg->create_group(['courseid' => $course->id]);
-        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
-        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
-        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
-
-        $res1 = \mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, false);
+        $res1 = \mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, false);
         static::assertCount(2, $res1);
         foreach ($res1 as $group) {
             self::assertFalse($group['ismember']);
         }
 
         // Add user to group.
-        $dg->create_group_member(['userid' => $user1->id, 'groupid' => $group1->id]);
+        $dg->create_group_member(['userid' => $userid, 'groupid' => $groupid]);
 
-        $res2 = \mod_groupmembers\groups::get_groups_and_members($course->id, 0, $user1->id, false);
+        $res2 = \mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, false);
         static::assertCount(2, $res2);
         foreach ($res2 as $group) {
-            if ($group['group']->id == $group1->id) {
+            if ($group['group']->id == $groupid) {
                 self::assertTrue($group['ismember']);
             } else {
                 self::assertFalse($group['ismember']);
@@ -198,5 +168,25 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
                 self::assertFalse($group['ismember']);
             }
         }
+    }
+
+    private static function prepare_nogrouping($dg) {
+        // Create course.
+        $course = $dg->create_course();
+
+        // Create users and enrol.
+        $user1 = $dg->create_user();
+        $user2 = $dg->create_user();
+        $dg->enrol_user($user1->id, $course->id);
+        $dg->enrol_user($user2->id, $course->id);
+
+        // Create groups and groupings.
+        $group1 = $dg->create_group(['courseid' => $course->id]);
+        $group2 = $dg->create_group(['courseid' => $course->id]);
+        $grouping1 = $dg->create_grouping(['courseid' => $course->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group1->id]);
+        $dg->create_grouping_group(['groupingid' => $grouping1->id, 'groupid' => $group2->id]);
+
+        return [$course->id, $user1->id, $group1->id];
     }
 }
