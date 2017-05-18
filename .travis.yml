@@ -14,18 +14,20 @@ php:
 addons:
   postgresql: 9.3
 
-#matrix:
-#  allow_failures:
-#    - env: DB=pgsql MOODLE_BRANCH=master
-#    - env: DB=mysqli MOODLE_BRANCH=master
+matrix:
+  allow_failures:
+    - env: DB=pgsql MOODLE_BRANCH=master
+    - env: DB=mysqli MOODLE_BRANCH=master
 
 env:
  global:
   - IGNORE_PATHS=amd/build
  matrix:
   - DB=pgsql MOODLE_BRANCH=MOODLE_32_STABLE
+  - DB=pgsql MOODLE_BRANCH=MOODLE_33_STABLE
   - DB=pgsql MOODLE_BRANCH=master
   - DB=mysqli MOODLE_BRANCH=MOODLE_32_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_33_STABLE
   - DB=mysqli MOODLE_BRANCH=master
 
 before_install:
