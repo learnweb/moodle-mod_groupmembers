@@ -34,7 +34,7 @@ It also plays nice with other themes (Theme Clean):
 ## Feedback and pull requests welcome
 
 Thanks for trying out this plugin, we hope you enjoy it. Please feel free to contact us by reporting issues or feature requests on GitHub.
-We are also looking further to reviewing incoming pull requests!
+We are also looking forward to reviewing incoming pull requests!
 
 :heart:
 
