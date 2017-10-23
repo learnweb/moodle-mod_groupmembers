@@ -16,8 +16,14 @@ addons:
 
 matrix:
   allow_failures:
-    - env: DB=pgsql MOODLE_BRANCH=master
-    - env: DB=mysqli MOODLE_BRANCH=master
+#    - env: DB=pgsql MOODLE_BRANCH=master
+#    - env: DB=mysqli MOODLE_BRANCH=master
+  exclude:
+  - php: 5.6
+    env: DB=pgsql MOODLE_BRANCH=master
+  - php: 5.6
+    env: DB=mysqli MOODLE_BRANCH=master
+  fast_finish: true
 
 env:
  global:
