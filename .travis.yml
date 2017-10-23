@@ -14,10 +14,6 @@ php:
 
 addons:
   postgresql: 9.3
-  apt:
-    packages:
-      - oracle-java8-installer
-      - oracle-java8-set-default
 
 matrix:
   allow_failures:
