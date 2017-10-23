@@ -19,6 +19,31 @@
 
     Template that renders one table per group, containing the respective group's members.
 
+    Example context (json):
+    {
+        "groups": [{
+                "id": 1,
+                "name": "Group no. 1",
+                "members": [{
+                    "id": 2,
+                    "picture": "some user picture",
+                    "displayname": "Firstname Surname",
+                    "maillink": "urlencoded.e@mail.local",
+                    "mailtext": "readable.e@mail.local",
+                    "mailhidden": true,
+                    "profileurl": "/user/view.php?id=2&course=5",
+                    "messageurl": "/message/index.php?id=2"
+                    }],
+                "ismember": true
+            },
+            {
+                "id": 2,
+                "name": "Group no. 2",
+                "members": [],
+                "ismember": false
+            }
+        ]
+    }
 }}
 {{#groups}}
 <h3 id="groupmembers-group-{{id}}"{{#ismember}} class="ismember"{{/ismember}}>{{name}}</h3>
