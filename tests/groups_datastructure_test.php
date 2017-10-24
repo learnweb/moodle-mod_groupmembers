@@ -13,12 +13,21 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Test logic used by the renderer whether to show/hide particular elements
+ *
+ * @package    mod_groupmembers
+ * @copyright  2017 Dennis M. Riehle, WWU Münster
+ * @copyright  2017 Jan C. Dageförde, WWU Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
  * Test logic used by the renderer whether to show/hide particular elements
  *
- * @group    mod_groupmembers
  * @package    mod_groupmembers
  * @copyright  2017 Dennis M. Riehle, WWU Münster
  * @copyright  2017 Jan C. Dageförde, WWU Münster
@@ -152,7 +161,7 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
      *
      * Users are not members of any groups.
      *
-     * @param $dg testing_data_generator Data generator
+     * @param testing_data_generator $dg Data generator
      * @return array [ID of course, ID of first user, ID of first group, ID of grouping]
      */
     private static function prepare_basic_data(testing_data_generator $dg) {

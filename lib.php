@@ -116,7 +116,6 @@ function groupmembers_delete_instance($id) {
 /**
  * Gets a full groupmembers record
  *
- * @global object
  * @param int $groupmembersid
  * @return stdClass|bool The groupmembers or false
  */

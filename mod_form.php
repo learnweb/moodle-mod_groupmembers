@@ -14,8 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
+/**
+ * Settings mod_form for mod_groupmembers
+ *
+ * @package    mod_groupmembers
+ * @copyright  2017 Dennis M. Riehle, WWU Münster
+ * @copyright  2017 Jan C. Dageförde, WWU Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ */
 
+defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 
 /**
@@ -29,6 +38,9 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
  */
 class mod_groupmembers_mod_form extends moodleform_mod {
 
+    /**
+     * Coursemodule settings form definition.
+     */
     protected function definition() {
         global $CFG, $COURSE, $DB;
 
