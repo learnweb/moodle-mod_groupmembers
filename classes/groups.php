@@ -14,13 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Static methods for collecting relevant groups and members
+ *
+ * @package    mod_groupmembers
+ * @copyright  2017 Dennis M. Riehle, WWU Münster
+ * @copyright  2017 Jan C. Dageförde, WWU Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace mod_groupmembers;
 defined('MOODLE_INTERNAL') || die();
 
 /**
  * Static methods for collecting relevant groups and members
  *
- * @group    mod_groupmembers
  * @package    mod_groupmembers
  * @copyright  2017 Dennis M. Riehle, WWU Münster
  * @copyright  2017 Jan C. Dageförde, WWU Münster

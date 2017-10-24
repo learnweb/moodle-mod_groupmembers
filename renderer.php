@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Renderer definition
+ * Renderer definition for mod_groupmembers
  *
  * @package    mod_groupmembers
  * @copyright  2017 Dennis M. Riehle, WWU Münster
@@ -27,7 +27,23 @@ defined('MOODLE_INTERNAL') || die();
 require_once(__DIR__. '/lib.php');
 require_once($CFG->libdir. '/weblib.php');
 
+/**
+ * Renderer definition for mod_groupmembers
+ *
+ * @package    mod_groupmembers
+ * @copyright  2017 Dennis M. Riehle, WWU Münster
+ * @copyright  2017 Jan C. Dageförde, WWU Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupmembers_renderer extends plugin_renderer_base {
+
+    /**
+     * Render the groups table(s)
+     *
+     * @param array $groups Array of groups as created by \mod_groupmembers\groups::get_groups_and_members()
+     * @param bool $showemail Setting whether email addresses should be suppressed
+     * @return string Rendered template
+     */
     public function render_allgroups(array $groups, $showemail) {
         global $USER, $COURSE, $CFG;
         $data = array(

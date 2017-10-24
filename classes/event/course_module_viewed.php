@@ -14,6 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The mod_groupmembers course module viewed event class.
+ *
+ * @package    mod_groupmembers
+ * @copyright  2017 Dennis M. Riehle, WWU Münster
+ * @copyright  2017 Jan C. Dageförde, WWU Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace mod_groupmembers\event;
 defined('MOODLE_INTERNAL') || die();
 
@@ -36,6 +45,16 @@ class course_module_viewed extends \core\event\course_module_viewed {
         $this->data['objecttable'] = 'groupmembers';
     }
 
+    /**
+     * This is used when restoring course logs where it is required that we
+     * map the objectid to it's new value in the new course.
+     *
+     * The 'db' key refers to the database table and the 'restore' key refers to
+     * the name of the restore element the objectid is associated with. In many
+     * cases these will be the same.
+     *
+     * @return array Mapping according to the definition above
+     */
     public static function get_objectid_mapping() {
         return array('db' => 'groupmembers', 'restore' => 'groupmembers');
     }
