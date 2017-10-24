@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin definition
+ * Moodle plugin upgrade functions
  *
  * @package    mod_groupmembers
  * @copyright  2017 Dennis M. Riehle, WWU Münster
@@ -25,8 +25,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v3.4-r3';
-$plugin->version   = 2017102401;         // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016120500;         // Requires this Moodle version
-$plugin->component = 'mod_groupmembers'; // Full name of the plugin (used for diagnostics).
+/**
+ * Upgrade script (no-op)
+ * @param int $oldversion Version number before update
+ * @return bool
+ */
+function xmldb_groupmembers_upgrade($oldversion) {
+    return true;
+}
