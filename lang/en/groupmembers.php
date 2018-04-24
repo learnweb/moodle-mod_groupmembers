@@ -45,3 +45,4 @@ $string['user:contact'] = 'Contact';
 $string['noowngroupsavailable'] = 'You are currently not assigned to any group.';
 $string['nogroupsavailable'] = 'There are currently no groups to be displayed.';
 $string['mailhidden'] = 'Mail contact disabled';
+$string['privacy:metadata'] = 'The Group Members Activity only displays information about groups, but does not effect or store any personal data. The existing groups and groupings data is stored in other locations.';

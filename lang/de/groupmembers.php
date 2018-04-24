@@ -45,3 +45,4 @@ $string['user:contact'] = 'Kontakt';
 $string['noowngroupsavailable'] = 'Du bist derzeit keiner Gruppe zugewiesen.';
 $string['nogroupsavailable'] = 'Es sind derzeit keine Gruppen zur Anzeige hinterlegt.';
 $string['mailhidden'] = 'E-Mail-Kontakt deaktiviert';
+$string['privacy:metadata'] = 'Das Gruppenmitgliedermodul zeigt lediglich Informationen über Gruppen und Gruppierungen an, die an anderer Stelle unabhängig vom Modul gespeichert werden.';
