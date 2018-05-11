@@ -1,5 +1,5 @@
 <?php
-// This file is part of a plugin for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,18 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin definition
+ * Privacy Subsystem implementation for mod_groupmembers.
  *
  * @package    mod_groupmembers
- * @copyright  2017 Dennis M. Riehle, WWU Münster
- * @copyright  2017 Jan C. Dageförde, WWU Münster
+ * @copyright  2018 Tamara Gunkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace mod_groupmembers\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v3.5-r1';
-$plugin->version   = 2018051100;         // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016120500;         // Requires this Moodle version
-$plugin->component = 'mod_groupmembers'; // Full name of the plugin (used for diagnostics).
+/**
+ * Privacy Subsystem for mod_groupmembers implementing null_provider.
+ *
+ * @copyright  2018 Tamara Gunkel
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+    // This trait must be included.
+    use \core_privacy\local\legacy_polyfill;
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function _get_reason() {
+        return 'privacy:metadata';
+    }
+}
