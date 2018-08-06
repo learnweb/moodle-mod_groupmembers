@@ -46,6 +46,9 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
      */
     public function render_allgroups(array $groups, $showemail) {
         global $USER, $COURSE, $CFG;
+
+        $config = get_config('mod_groupmembers');
+
         $data = array(
             'groups' => []
         );
@@ -57,7 +60,10 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                 $memberemailhidden = false;
                 $membermessage = null;
                 if ($USER->id != $member->id) {
-                    if ($member->maildisplay == core_user::MAILDISPLAY_HIDE) {
+                    if (!$config->showemailenable) {
+                        // Admin has decided that e-mail addresses should not be shown in this module.
+                        $memberemail = null;
+                    } else if ($member->maildisplay == core_user::MAILDISPLAY_HIDE) {
                         // Email address should not be rendered unless user has at least enabled display to course members.
                         // User has chosen not to reveal an email address. This can be made explicit by the template.
                         $memberemailhidden = true;
