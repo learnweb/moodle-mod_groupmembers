@@ -44,6 +44,8 @@ class mod_groupmembers_mod_form extends moodleform_mod {
     protected function definition() {
         global $CFG, $COURSE, $DB;
 
+        $config = get_config('mod_groupmembers');
+
         $mform    =& $this->_form;
 
         // -------------------------------------------------------------------------------
@@ -82,15 +84,19 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         );
         $mform->addElement('select', 'showgroups', get_string('showgroups', 'groupmembers'), $options);
         $mform->addRule('showgroups', null, 'required', null, 'client');
+        $mform->setDefault('showgroups', $config->showgroupsdefault);
 
         // E-Mail visibility selector - used to decide whether e-mail adresses should be shown to other users.
-        $options = array(
-            GROUPMEMBERS_SHOWEMAIL_NO => get_string('showemail:no', 'groupmembers'),
-            GROUPMEMBERS_SHOWEMAIL_OWNGROUP => get_string('showemail:owngroup', 'groupmembers'),
-            GROUPMEMBERS_SHOWEMAIL_ALLGROUPS => get_string('showemail:allgroups', 'groupmembers'),
-        );
-        $mform->addElement('select', 'showemail', get_string('showemail', 'groupmembers'), $options);
-        $mform->addRule('showemail', null, 'required', null, 'client');
+        if ($config->showemailenable) {
+            $options = array(
+                GROUPMEMBERS_SHOWEMAIL_NO => get_string('showemail:no', 'groupmembers'),
+                GROUPMEMBERS_SHOWEMAIL_OWNGROUP => get_string('showemail:owngroup', 'groupmembers'),
+                GROUPMEMBERS_SHOWEMAIL_ALLGROUPS => get_string('showemail:allgroups', 'groupmembers'),
+            );
+            $mform->addElement('select', 'showemail', get_string('showemail', 'groupmembers'), $options);
+            $mform->addRule('showemail', null, 'required', null, 'client');
+            $mform->setDefault('showemail', $config->showemaildefault);
+        }
 
         // -------------------------------------------------------------------------------
         $this->standard_coursemodule_elements();
