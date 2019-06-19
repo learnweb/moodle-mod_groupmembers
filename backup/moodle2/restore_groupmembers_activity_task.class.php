@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/mod/groupmembers/backup/moodle2/restore_groupmembers_stepslib.php'); // Because it exists (must).
 
 /**
- * folder restore task that provides all the settings and steps to perform one
+ * Groupmembers restore task that provides all the settings and steps to perform one
  * complete restore of the activity
  */
 class restore_groupmembers_activity_task extends restore_activity_task {
@@ -73,7 +73,7 @@ class restore_groupmembers_activity_task extends restore_activity_task {
     /**
      * Define the restore log rules that will be applied
      * by the {@link restore_logs_processor} when restoring
-     * folder logs. It must return one array
+     * groupmembers logs. It must return one array
      * of {@link restore_log_rule} objects
      */
     static public function define_restore_log_rules() {

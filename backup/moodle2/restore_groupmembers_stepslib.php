@@ -44,14 +44,14 @@ class restore_groupmembers_activity_structure_step extends restore_activity_stru
         $data = (object)$data;
         $data->course = $this->get_courseid();
 
-        // Insert the folder record.
+        // Insert the groupmembers record.
         $newitemid = $DB->insert_record('groupmembers', $data);
         // Immediately after inserting "activity" record, call this.
         $this->apply_activity_instance($newitemid);
     }
 
     protected function after_execute() {
-        // Add folder related files, no need to match by itemname (just internally handled context).
+        // Add groupmembers related files, no need to match by itemname (just internally handled context).
         $this->add_related_files('mod_groupmembers', 'intro', null);
         $this->add_related_files('mod_groupmembers', 'content', null);
     }
