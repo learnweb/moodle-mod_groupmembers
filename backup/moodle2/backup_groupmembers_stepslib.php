@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -32,23 +31,23 @@ class backup_groupmembers_activity_structure_step extends backup_activity_struct
 
     protected function define_structure() {
 
-        // To know if we are including userinfo
+        // To know if we are including userinfo.
         $userinfo = $this->get_setting_value('userinfo');
 
-        // Define each element separated
+        // Define each element separated.
         $groupmembers = new backup_nested_element('groupmembers', array('id'),
                 array('name', 'intro', 'introformat', 'listgroupingid', 'showgroups', 'showemail', 'timemodified'));
 
-        // Define sources
+        // Define sources.
         $groupmembers->set_source_table('groupmembers', array('id' => backup::VAR_ACTIVITYID));
 
-        // Define id annotations
+        // Define id annotations.
 
-        // Define file annotations
+        // Define file annotations.
         $groupmembers->annotate_files('mod_groupmembers', 'intro', null);
         $groupmembers->annotate_files('mod_groupmembers', 'content', null);
 
-        // Return the root element (groupmembers), wrapped into standard activity structure
+        // Return the root element (groupmembers), wrapped into standard activity structure.
         return $this->prepare_activity_structure($groupmembers);
     }
 }

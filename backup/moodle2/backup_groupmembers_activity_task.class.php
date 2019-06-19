@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -55,15 +54,15 @@ class backup_groupmembers_activity_task extends backup_activity_task {
     static public function encode_content_links($content) {
         global $CFG;
 
-        $base = preg_quote($CFG->wwwroot,"/");
+        $base = preg_quote($CFG->wwwroot, "/");
 
         // Link to the list of groupmembers
-        $search="/(".$base."\/mod\/groupmembers\/index.php\?id\=)([0-9]+)/";
-        $content= preg_replace($search, '$@GROUPMEMBERINDEX*$2@$', $content);
+        $search = "/(".$base."\/mod\/groupmembers\/index.php\?id\=)([0-9]+)/";
+        $content = preg_replace($search, '$@GROUPMEMBERINDEX*$2@$', $content);
 
         // Link to view by moduleid
-        $search="/(".$base."\/mod\/groupmembers\/view.php\?id\=)([0-9]+)/";
-        $content= preg_replace($search, '$@GROUPMEMBERVIEWBYID*$2@$', $content);
+        $search = "/(".$base."\/mod\/groupmembers\/view.php\?id\=)([0-9]+)/";
+        $content = preg_replace($search, '$@GROUPMEMBERVIEWBYID*$2@$', $content);
 
         return $content;
     }
