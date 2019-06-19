@@ -56,7 +56,7 @@ function groupmembers_supports($feature) {
         case FEATURE_GRADE_OUTCOMES:
             return false;
         case FEATURE_BACKUP_MOODLE2:
-            return false;
+            return true;
         case FEATURE_SHOW_DESCRIPTION:
             return true;
         default:
