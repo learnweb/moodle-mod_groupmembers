@@ -44,7 +44,7 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
      * @param bool $showemail Setting whether email addresses should be suppressed
      * @return string Rendered template
      */
-    public function render_allgroups(array $groups, $showemail) {
+    public function render_allgroups(array $groups, $showemail, $showphone, $showdeptinst, $showdesc) {
         global $USER, $COURSE, $CFG;
 
         $config = get_config('mod_groupmembers');
