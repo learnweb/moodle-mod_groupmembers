@@ -49,6 +49,11 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
 
         $config = get_config('mod_groupmembers');
 
+        // If fields have been disabled in admin settings, override local settings,
+        if (!$config->showphoneenable) { $showphone = GROUPMEMBERS_SHOWFIELD_NO; }
+        if (!$config->showdeptinstenable) { $showdeptinst = GROUPMEMBERS_SHOWFIELD_NO; }
+        if (!$config->showdescenable) { $showdesc = GROUPMEMBERS_SHOWFIELD_NO; }
+
         $data = array(
             'groups' => []
         );
@@ -59,6 +64,22 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                 $memberemailtext = null;
                 $memberemailhidden = false;
                 $membermessage = null;
+                $memberphone = null;
+                $memberdeptinst = null;
+                $memberdesc = null;
+                $membersummary = null;
+
+                // Hide additional fields if user is not allowed to view this group.
+                if ($showphone == GROUPMEMBERS_SHOWFIELD_OWNGROUP && !$group['ismember']) {
+                    $showphone == GROUPMEMBERS_SHOWFIELD_NO;
+                }
+                if ($showdeptinst == GROUPMEMBERS_SHOWFIELD_OWNGROUP && !$group['ismember']) {
+                    $showdeptinst == GROUPMEMBERS_SHOWFIELD_NO;
+                }
+                if ($showdesc == GROUPMEMBERS_SHOWFIELD_OWNGROUP && !$group['ismember']) {
+                    $showdesc == GROUPMEMBERS_SHOWFIELD_NO;
+                }
+
                 if ($USER->id != $member->id) {
                     if (!$config->showemailenable) {
                         // Admin has decided that e-mail addresses should not be shown in this module.
@@ -78,6 +99,20 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                         has_capability('moodle/site:sendmessage', \context_system::instance())) {
                         $membermessage = new moodle_url('/message/index.php', ['id' => $member->id]);
                     }
+
+                    // Get data for additional fields if not hidden.
+                    if ($showphone > 0) {
+                        $memberphone = implode(', ', array_filter(array($member->phone1, $member->phone2)));
+                    }
+                    if ($showdeptinst > 0) {
+                        $memberdeptinst = implode(', ', array_filter(array($member->department, $member->institution)));
+                    }
+                    if ($showdesc > 0 && $member->description) {
+                        $memberdesc = $member->description;
+                        if (count_words($member->description) > 50) {
+                            $membersummary = get_string('user:descsummary', 'mod_groupmembers', $member->firstname);
+                        }
+                    }
                 }
 
                 $members[] = array(
@@ -88,7 +123,11 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                     'mailtext' => $memberemailtext,
                     'mailhidden' => $memberemailhidden,
                     'profileurl' => new moodle_url('/user/view.php', ['id' => $member->id, 'course' => $COURSE->id]),
-                    'messageurl' => $membermessage
+                    'messageurl' => $membermessage,
+                    'memberphone' => $memberphone,
+                    'memberdeptinst' => $memberdeptinst,
+                    'memberdesc' => $memberdesc,
+                    'membersummary' => $membersummary
                 );
             }
 
@@ -96,7 +135,10 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                 'id' => $group['group']->id,
                 'name' => $group['group']->name,
                 'members' => $members,
-                'ismember' => $group['ismember']
+                'ismember' => $group['ismember'],
+                'showphone' => $showphone,
+                'showdeptinst' => $showdeptinst,
+                'showdesc' => $showdesc
             );
         }
         return $this->render_from_template('mod_groupmembers/allgroups', $data);
