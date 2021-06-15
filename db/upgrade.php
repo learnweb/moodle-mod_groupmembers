@@ -31,5 +31,36 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_groupmembers_upgrade($oldversion) {
+    global $DB;
+
+    $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
+    $table = new xmldb_table('groupmembers');
+
+    if ($oldversion < 2021061500) {
+        // Define field showphone to be added to groupmembers.
+        $field = new xmldb_field('showphone', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'showemail');
+
+        // Conditionally launch add field option_mute_upon_entry.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field showdeptinst to be added to groupmembers.
+        $field = new xmldb_field('showdeptinst', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'showphone');
+
+        // Conditionally launch add field option_mute_upon_entry.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field showdesc to be added to groupmembers.
+        $field = new xmldb_field('showdesc', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'showdeptinst');
+
+        // Conditionally launch add field option_mute_upon_entry.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+    }
+
     return true;
 }
