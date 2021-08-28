@@ -56,11 +56,11 @@ class backup_groupmembers_activity_task extends backup_activity_task {
 
         $base = preg_quote($CFG->wwwroot, "/");
 
-        // Link to the list of groupmembers
+        // Link to the list of groupmembers.
         $search = "/(".$base."\/mod\/groupmembers\/index.php\?id\=)([0-9]+)/";
         $content = preg_replace($search, '$@GROUPMEMBERINDEX*$2@$', $content);
 
-        // Link to view by moduleid
+        // Link to view by moduleid.
         $search = "/(".$base."\/mod\/groupmembers\/view.php\?id\=)([0-9]+)/";
         $content = preg_replace($search, '$@GROUPMEMBERVIEWBYID*$2@$', $content);
 

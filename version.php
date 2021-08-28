@@ -27,6 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = 'v3.11-r2';
-$plugin->version   = 2021082700;         // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016120500;         // Requires this Moodle version
+$plugin->version   = 2021082700;         // The current module version (Date: YYYYMMDDXX).
+$plugin->requires  = 2016120500;         // Requires this Moodle version.
 $plugin->component = 'mod_groupmembers'; // Full name of the plugin (used for diagnostics).
