@@ -36,7 +36,7 @@ function xmldb_groupmembers_upgrade($oldversion) {
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
     $table = new xmldb_table('groupmembers');
 
-    if ($oldversion < 2021061500) {
+    if ($oldversion < 2022042100) {
         // Define field showphone to be added to groupmembers.
         $field = new xmldb_field('showphone', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'showemail');
 
