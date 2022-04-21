@@ -31,12 +31,12 @@ $PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', array('id' => $id)))
 
 // Load course module.
 if (! $cm = get_coursemodule_from_id('groupmembers', $id)) {
-    print_error('invalidcoursemodule');
+    throw new moodle_exception('invalidcoursemodule');
 }
 
 // Load corresponding course.
 if (! $course = $DB->get_record('course', array('id' => $cm->course))) {
-    print_error('coursemisconf');
+    throw new moodle_exception('coursemisconf');
 }
 
 require_course_login($course, false, $cm);
@@ -44,7 +44,7 @@ $context = context_module::instance($cm->id);
 
 // Load groupmembers object.
 if (! $groupmembers = groupmembers_get_groupmembers($cm->instance)) {
-    print_error('invalidcoursemodule');
+    throw new moodle_exception('invalidcoursemodule');
 }
 
 $PAGE->set_title($groupmembers->name);
