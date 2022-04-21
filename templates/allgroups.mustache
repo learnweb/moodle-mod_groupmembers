@@ -50,8 +50,17 @@
 <table class="generaltable{{#ismember}} ismember{{/ismember}}" id="groupmembers-group-{{id}}-members">
     <thead>
     <tr>
-        <th style="width: 50%">{{#str}}user:fullname, mod_groupmembers{{/str}}</th>
+        <th>{{#str}}user:fullname, mod_groupmembers{{/str}}</th>
         <th>{{#str}}user:contact, mod_groupmembers{{/str}}</th>
+        {{#showphone}}
+            <th>{{#str}}user:phone, mod_groupmembers{{/str}}</th>
+        {{/showphone}}
+        {{#showdeptinst}}
+            <th>{{#str}}user:deptinst, mod_groupmembers{{/str}}</th>
+        {{/showdeptinst}}
+        {{#showdesc}}
+            <th>{{#str}}user:desc, mod_groupmembers{{/str}}</th>
+        {{/showdesc}}
     </tr>
     </thead>
     <tbody>
@@ -75,6 +84,26 @@
             {{/maillink}}
             </div>
         </td>
+        {{#showphone}}
+            <td>{{memberphone}}</td>
+        {{/showphone}}
+        {{#showdeptinst}}
+            <td>{{memberdeptinst}}</td>
+        {{/showdeptinst}}
+        {{#showdesc}}
+            <td>
+                {{#memberdesc}}
+                    {{#membersummary}}
+                        <details>
+                            <summary>{{membersummary}}</summary>
+                    {{/membersummary}}
+                            <span>{{{memberdesc}}}</span>
+                    {{#membersummary}}
+                        </details>
+                    {{/membersummary}}
+                {{/memberdesc}}
+            </td>
+        {{/showdesc}}
     </tr>
     {{/members}}
     </tbody>

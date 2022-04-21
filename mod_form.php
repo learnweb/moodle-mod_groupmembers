@@ -98,6 +98,42 @@ class mod_groupmembers_mod_form extends moodleform_mod {
             $mform->setDefault('showemail', $config->showemaildefault);
         }
 
+        // Phone visibility selector - used to decide whether phone numbers should be shown to other users.
+        if ($config->showphoneenable) {
+            $options = array(
+                GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
+                GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
+                GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
+            );
+            $mform->addElement('select', 'showphone', get_string('showphone', 'groupmembers'), $options);
+            $mform->addRule('showphone', null, 'required', null, 'client');
+            $mform->setDefault('showphone', $config->showphonedefault);
+        }
+
+        // Department & Institution visibility selector - used to decide whether dept. and inst. should be shown to other users.
+        if ($config->showdeptinstenable) {
+            $options = array(
+                GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
+                GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
+                GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
+            );
+            $mform->addElement('select', 'showdeptinst', get_string('showdeptinst', 'groupmembers'), $options);
+            $mform->addRule('showdeptinst', null, 'required', null, 'client');
+            $mform->setDefault('showdeptinst', $config->showdeptinstdefault);
+        }
+
+        // Department & Institution visibility selector - used to decide whether dept. and inst. should be shown to other users.
+        if ($config->showdescenable) {
+            $options = array(
+                GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
+                GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
+                GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
+            );
+            $mform->addElement('select', 'showdesc', get_string('showdesc', 'groupmembers'), $options);
+            $mform->addRule('showdesc', null, 'required', null, 'client');
+            $mform->setDefault('showdesc', $config->showdescdefault);
+        }
+
         // -------------------------------------------------------------------------------
         $this->standard_coursemodule_elements();
         // -------------------------------------------------------------------------------

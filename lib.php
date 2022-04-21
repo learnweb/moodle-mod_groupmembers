@@ -23,8 +23,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Define some constants
  */
@@ -33,6 +31,9 @@ define('GROUPMEMBERS_SHOWGROUPS_OWN', 1);
 define('GROUPMEMBERS_SHOWEMAIL_NO', 0);
 define('GROUPMEMBERS_SHOWEMAIL_OWNGROUP', 1);
 define('GROUPMEMBERS_SHOWEMAIL_ALLGROUPS', 2);
+define('GROUPMEMBERS_SHOWFIELD_NO', 0);
+define('GROUPMEMBERS_SHOWFIELD_OWNGROUP', 1);
+define('GROUPMEMBERS_SHOWFIELD_ALLGROUPS', 2);
 
 /**
  * List of features supported in groupmembers module

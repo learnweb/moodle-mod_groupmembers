@@ -75,7 +75,8 @@ if (count($groupsandmembers) === 0) {
 } else {
     /** @var mod_groupmembers_renderer $renderer */
     $renderer = $PAGE->get_renderer('mod_groupmembers');
-    echo $renderer->render_allgroups($groupsandmembers, $groupmembers->showemail);
+    echo $renderer->render_allgroups($groupsandmembers, $groupmembers->showemail, $groupmembers->showphone,
+                                     $groupmembers->showdeptinst, $groupmembers->showdesc);
 }
 
 // Theme footer.
