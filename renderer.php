@@ -49,10 +49,16 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
 
         $config = get_config('mod_groupmembers');
 
-        // If fields have been disabled in admin settings, override local settings,
-        if (!$config->showphoneenable) { $showphone = GROUPMEMBERS_SHOWFIELD_NO; }
-        if (!$config->showdeptinstenable) { $showdeptinst = GROUPMEMBERS_SHOWFIELD_NO; }
-        if (!$config->showdescenable) { $showdesc = GROUPMEMBERS_SHOWFIELD_NO; }
+        // If fields have been disabled in admin settings, override local settings.
+        if (!$config->showphoneenable) {
+            $showphone = GROUPMEMBERS_SHOWFIELD_NO;
+        }
+        if (!$config->showdeptinstenable) {
+            $showdeptinst = GROUPMEMBERS_SHOWFIELD_NO;
+        }
+        if (!$config->showdescenable) {
+            $showdesc = GROUPMEMBERS_SHOWFIELD_NO;
+        }
 
         $data = array(
             'groups' => []

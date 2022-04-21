@@ -24,7 +24,6 @@
  */
 
 namespace mod_groupmembers;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Static methods for collecting relevant groups and members
