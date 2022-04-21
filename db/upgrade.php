@@ -60,6 +60,8 @@ function xmldb_groupmembers_upgrade($oldversion) {
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
+        upgrade_mod_savepoint(true, 2022042100, 'groupmembers');
+
     }
 
     return true;
