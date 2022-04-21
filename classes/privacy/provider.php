@@ -24,8 +24,6 @@
 
 namespace mod_groupmembers\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy Subsystem for mod_groupmembers implementing null_provider.
  *

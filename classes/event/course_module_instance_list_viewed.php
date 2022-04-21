@@ -24,7 +24,6 @@
  */
 
 namespace mod_groupmembers\event;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * The mod_groupmembers course module viewed event class.
