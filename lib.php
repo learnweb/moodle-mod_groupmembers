@@ -41,6 +41,13 @@ define('GROUPMEMBERS_SHOWFIELD_ALLGROUPS', 2);
  * @return mixed True if module supports feature, false if not, null if doesn't know
  */
 function groupmembers_supports($feature) {
+
+    if (defined('FEATURE_MOD_PURPOSE')) {
+        if ($feature == FEATURE_MOD_PURPOSE) {
+            return MOD_PURPOSE_ADMINISTRATION;
+        }
+    }
+
     switch($feature) {
         case FEATURE_MOD_ARCHETYPE:
             return MOD_ARCHETYPE_RESOURCE;
