@@ -55,11 +55,6 @@ groupmembers_view($groupmembers, $course, $cm, $context);
 
 // Theme and module header/intro.
 echo $OUTPUT->header();
-echo $OUTPUT->heading(format_string($groupmembers->name), 2, null);
-
-if (!empty($groupmembers->intro)) {
-    echo $OUTPUT->box(format_module_intro('groupmembers', $groupmembers, $cm->id), 'generalbox', 'intro');
-}
 
 // Collect applicable groups and their members.
 $groupsandmembers = \mod_groupmembers\groups::get_groups_and_members($course->id, $groupmembers->listgroupingid,
