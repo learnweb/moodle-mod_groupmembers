@@ -47,7 +47,7 @@ class groups {
      *      'group' => \stdClass, 'members' => array[\stdClass], 'ismember' => bool ]
      */
     public static function get_groups_and_members($courseid, $groupingid, $userid, $onlyown) {
-        $groupsandmembers = array();
+        $groupsandmembers = [];
 
         // Fetch relevant groups.
         if ($onlyown) {
@@ -66,11 +66,11 @@ class groups {
 
             // Get members of group.
             $members = groups_get_members($group->id);
-            $groupsandmembers[] = array(
+            $groupsandmembers[] = [
                 'group' => $group,
                 'members' => $members,
-                'ismember' => $ismember
-            );
+                'ismember' => $ismember,
+            ];
         }
 
         return $groupsandmembers;

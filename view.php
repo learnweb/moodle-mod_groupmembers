@@ -27,7 +27,7 @@ require_once(__DIR__. '/../../config.php');
 require_once(__DIR__. '/lib.php');
 
 $id = required_param('id', PARAM_INT);  // Course Module ID.
-$PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', array('id' => $id)));
+$PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', ['id' => $id]));
 
 // Load course module.
 if (! $cm = get_coursemodule_from_id('groupmembers', $id)) {
@@ -35,7 +35,7 @@ if (! $cm = get_coursemodule_from_id('groupmembers', $id)) {
 }
 
 // Load corresponding course.
-if (! $course = $DB->get_record('course', array('id' => $cm->course))) {
+if (! $course = $DB->get_record('course', ['id' => $cm->course])) {
     throw new moodle_exception('coursemisconf');
 }
 

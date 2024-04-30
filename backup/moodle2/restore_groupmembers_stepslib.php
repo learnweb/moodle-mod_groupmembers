@@ -15,13 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Structure step to restore one groupmembers activity
  * @package    mod_groupmembers
  * @copyright  2019 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-/**
- * Define all the restore steps that will be used by the restore_groupmembers_activity_task
  */
 
 /**
@@ -29,15 +26,22 @@
  */
 class restore_groupmembers_activity_structure_step extends restore_activity_structure_step {
 
+    /**
+     * Define structure of restore step.
+     */
     protected function define_structure() {
 
-        $paths = array();
+        $paths = [];
         $paths[] = new restore_path_element('groupmembers', '/activity/groupmembers');
 
         // Return the paths wrapped into standard activity structure.
         return $this->prepare_activity_structure($paths);
     }
 
+    /**
+     * Restore groupmember activity.
+     * @param object $data groupmember activity data to be restored.
+     */
     protected function process_groupmembers($data) {
         global $DB;
 
@@ -50,6 +54,9 @@ class restore_groupmembers_activity_structure_step extends restore_activity_stru
         $this->apply_activity_instance($newitemid);
     }
 
+    /**
+     * Restore related files after execute.
+     */
     protected function after_execute() {
         // Add groupmembers related files, no need to match by itemname (just internally handled context).
         $this->add_related_files('mod_groupmembers', 'intro', null);

@@ -27,17 +27,20 @@
  */
 class backup_groupmembers_activity_structure_step extends backup_activity_structure_step {
 
+    /**
+     * Define structure for backup step.
+     */
     protected function define_structure() {
 
         // To know if we are including userinfo.
         $userinfo = $this->get_setting_value('userinfo');
 
         // Define each element separated.
-        $groupmembers = new backup_nested_element('groupmembers', array('id'),
-                array('name', 'intro', 'introformat', 'listgroupingid', 'showgroups', 'showemail', 'timemodified'));
+        $groupmembers = new backup_nested_element('groupmembers', ['id'],
+                ['name', 'intro', 'introformat', 'listgroupingid', 'showgroups', 'showemail', 'timemodified']);
 
         // Define sources.
-        $groupmembers->set_source_table('groupmembers', array('id' => backup::VAR_ACTIVITYID));
+        $groupmembers->set_source_table('groupmembers', ['id' => backup::VAR_ACTIVITYID]);
 
         // Define id annotations.
 

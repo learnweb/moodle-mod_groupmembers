@@ -73,10 +73,10 @@ if ($ADMIN->fulltree) {
     $name = 'mod_groupmembers/showgroupsdefault';
     $title = get_string('setting_showgroupsdefault', 'mod_groupmembers', null, true);
     $description = get_string('setting_showgroupsdefault_desc', 'mod_groupmembers', null, true);
-    $options = array(
+    $options = [
             GROUPMEMBERS_SHOWGROUPS_ALL => get_string('showgroups:all', 'groupmembers'),
             GROUPMEMBERS_SHOWGROUPS_OWN => get_string('showgroups:own', 'groupmembers'),
-    );
+    ];
     $setting = new admin_setting_configselect($name, $title, $description, GROUPMEMBERS_SHOWGROUPS_ALL, $options);
     $settings->add($setting);
 
@@ -84,11 +84,11 @@ if ($ADMIN->fulltree) {
     $name = 'mod_groupmembers/showemaildefault';
     $title = get_string('setting_showemaildefault', 'mod_groupmembers', null, true);
     $description = get_string('setting_showemaildefault_desc', 'mod_groupmembers', null, true);
-    $options = array(
+    $options = [
             GROUPMEMBERS_SHOWEMAIL_NO => get_string('showemail:no', 'groupmembers'),
             GROUPMEMBERS_SHOWEMAIL_OWNGROUP => get_string('showemail:owngroup', 'groupmembers'),
             GROUPMEMBERS_SHOWEMAIL_ALLGROUPS => get_string('showemail:allgroups', 'groupmembers'),
-    );
+    ];
     $setting = new admin_setting_configselect($name, $title, $description, GROUPMEMBERS_SHOWEMAIL_NO, $options);
     $settings->add($setting);
 
@@ -96,11 +96,11 @@ if ($ADMIN->fulltree) {
     $name = 'mod_groupmembers/showphonedefault';
     $title = get_string('setting_showphonedefault', 'mod_groupmembers', null, true);
     $description = get_string('setting_showphonedefault_desc', 'mod_groupmembers', null, true);
-    $options = array(
+    $options = [
             GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
             GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
             GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
-    );
+    ];
     $setting = new admin_setting_configselect($name, $title, $description, GROUPMEMBERS_SHOWFIELD_NO, $options);
     $settings->add($setting);
 
@@ -108,11 +108,11 @@ if ($ADMIN->fulltree) {
     $name = 'mod_groupmembers/showdeptinstdefault';
     $title = get_string('setting_showdeptinstdefault', 'mod_groupmembers', null, true);
     $description = get_string('setting_showdeptinstdefault_desc', 'mod_groupmembers', null, true);
-    $options = array(
+    $options = [
             GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
             GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
             GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
-    );
+    ];
     $setting = new admin_setting_configselect($name, $title, $description, GROUPMEMBERS_SHOWFIELD_NO, $options);
     $settings->add($setting);
 
@@ -120,11 +120,11 @@ if ($ADMIN->fulltree) {
     $name = 'mod_groupmembers/showdescdefault';
     $title = get_string('setting_showdescdefault', 'mod_groupmembers', null, true);
     $description = get_string('setting_showdescdefault_desc', 'mod_groupmembers', null, true);
-    $options = array(
+    $options = [
             GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
             GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
             GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
-    );
+    ];
     $setting = new admin_setting_configselect($name, $title, $description, GROUPMEMBERS_SHOWFIELD_NO, $options);
     $settings->add($setting);
 

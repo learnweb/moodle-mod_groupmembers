@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$handlers = array();
+$handlers = [];
 
 /* List of events thrown from groupmembers module
 
