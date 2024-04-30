@@ -27,14 +27,14 @@ require_once(__DIR__. '/../../config.php');
 require_once(__DIR__. '/lib.php');
 
 $id = required_param('id', PARAM_INT);   // Course ID.
-$PAGE->set_url('/mod/groupmembers/index.php', array('id' => $id));
+$PAGE->set_url('/mod/groupmembers/index.php', ['id' => $id]);
 
 $course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
 
 require_course_login($course);
 $PAGE->set_pagelayout('incourse');
 
-$eventdata = array('context' => context_course::instance($id));
+$eventdata = ['context' => context_course::instance($id)];
 $event = \mod_groupmembers\event\course_module_instance_list_viewed::create($eventdata);
 $event->add_record_snapshot('course', $course);
 $event->trigger();
@@ -54,7 +54,7 @@ if (! $instances = get_all_instances_in_course('groupmembers', $course)) {
 
 
 
-$linklist = array();
+$linklist = [];
 foreach ($instances as $instance) {
     $linklist[] = html_writer::link(new moodle_url('/mod/groupmembers/view.php', ['id' => $instance->coursemodule]),
         $instance->name);

@@ -42,6 +42,9 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
      *
      * @param array $groups Array of groups as created by \mod_groupmembers\groups::get_groups_and_members()
      * @param bool $showemail Setting whether email addresses should be suppressed
+     * @param bool $showphone Whether phone number should be displayed.
+     * @param bool $showdeptinst Whether the department should be displayed.
+     * @param bool $showdesc Whether the description should be displayed.g
      * @return string Rendered template
      */
     public function render_allgroups(array $groups, $showemail, $showphone, $showdeptinst, $showdesc) {
@@ -60,11 +63,11 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
             $showdesc = GROUPMEMBERS_SHOWFIELD_NO;
         }
 
-        $data = array(
-            'groups' => []
-        );
+        $data = [
+            'groups' => [],
+        ];
         foreach ($groups as $group) {
-            $members = array();
+            $members = [];
             foreach ($group['members'] as $member) {
                 $memberemail = null;
                 $memberemailtext = null;
@@ -108,10 +111,10 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
 
                     // Get data for additional fields if not hidden.
                     if ($showphone > 0) {
-                        $memberphone = implode(', ', array_filter(array($member->phone1, $member->phone2)));
+                        $memberphone = implode(', ', array_filter([$member->phone1, $member->phone2]));
                     }
                     if ($showdeptinst > 0) {
-                        $memberdeptinst = implode(', ', array_filter(array($member->department, $member->institution)));
+                        $memberdeptinst = implode(', ', array_filter([$member->department, $member->institution]));
                     }
                     if ($showdesc > 0 && $member->description) {
                         $memberdesc = $member->description;
@@ -121,7 +124,7 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                     }
                 }
 
-                $members[] = array(
+                $members[] = [
                     'id' => $member->id,
                     'picture' => $this->output->user_picture($member),
                     'displayname' => fullname($member),
@@ -133,19 +136,19 @@ class mod_groupmembers_renderer extends plugin_renderer_base {
                     'memberphone' => $memberphone,
                     'memberdeptinst' => $memberdeptinst,
                     'memberdesc' => $memberdesc,
-                    'membersummary' => $membersummary
-                );
+                    'membersummary' => $membersummary,
+                ];
             }
 
-            $data['groups'][] = array(
+            $data['groups'][] = [
                 'id' => $group['group']->id,
                 'name' => $group['group']->name,
                 'members' => $members,
                 'ismember' => $group['ismember'],
                 'showphone' => $showphone,
                 'showdeptinst' => $showdeptinst,
-                'showdesc' => $showdesc
-            );
+                'showdesc' => $showdesc,
+            ];
         }
         return $this->render_from_template('mod_groupmembers/allgroups', $data);
     }

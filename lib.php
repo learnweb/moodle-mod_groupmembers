@@ -148,10 +148,10 @@ function groupmembers_get_groupmembers($groupmembersid) {
 function groupmembers_view($groupmembers, $course, $cm, $context) {
 
     // Trigger course_module_viewed event.
-    $params = array(
+    $params = [
         'context' => $context,
-        'objectid' => $groupmembers->id
-    );
+        'objectid' => $groupmembers->id,
+    ];
 
     $event = \mod_groupmembers\event\course_module_viewed::create($params);
     $event->add_record_snapshot('course_modules', $cm);

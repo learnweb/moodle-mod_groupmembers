@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace mod_groupmembers;
 
 /**
  * Test logic used by the renderer whether to show/hide particular elements
@@ -33,14 +33,15 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2017 Jan C. Dageförde, WWU Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
+final class groups_datastructure_test extends \advanced_testcase {
 
     /**
      * Test pair:
      * - show only own groups
      * - show regardless of grouping
+     * @covers \mod_groupmembers\groups::get_groups_and_members
      */
-    public function test_only_own_nogrouping() {
+    public function test_only_own_nogrouping(): void {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
 
@@ -60,8 +61,9 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
      * Test pair:
      * - show only own groups
      * - limit to particular grouping
+     * @covers \mod_groupmembers\groups::get_groups_and_members
      */
-    public function test_only_own_withgrouping() {
+    public function test_only_own_withgrouping(): void {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
         list($courseid, $userid, $groupid, $groupingid) = $this->prepare_basic_data($dg);
@@ -84,8 +86,9 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
      * Test pair:
      * - show all groups
      * - show regardless of grouping
+     * @covers \mod_groupmembers\groups::get_groups_and_members
      */
-    public function test_all_nogrouping() {
+    public function test_all_nogrouping(): void {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
         list($courseid, $userid, $groupid) = $this->prepare_basic_data($dg);
@@ -115,8 +118,9 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
      * Test pair:
      * - show all groups
      * - limit to particular grouping
+     * @covers \mod_groupmembers\groups::get_groups_and_members
      */
-    public function test_all_withgrouping() {
+    public function test_all_withgrouping(): void {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
         list($courseid, $userid) = $this->prepare_basic_data($dg);
@@ -161,10 +165,10 @@ class mod_groupmembers_groups_datastructure_testcase extends advanced_testcase {
      *
      * Users are not members of any groups.
      *
-     * @param testing_data_generator $dg Data generator
+     * @param \testing_data_generator $dg Data generator
      * @return array [ID of course, ID of first user, ID of first group, ID of grouping]
      */
-    private static function prepare_basic_data(testing_data_generator $dg) {
+    private static function prepare_basic_data(\testing_data_generator $dg) {
         // Create course.
         $course = $dg->create_course();
 

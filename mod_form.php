@@ -51,7 +51,7 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         // -------------------------------------------------------------------------------
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
-        $mform->addElement('text', 'name', get_string('groupmembersname', 'groupmembers'), array('size' => '64'));
+        $mform->addElement('text', 'name', get_string('groupmembersname', 'groupmembers'), ['size' => '64']);
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -66,33 +66,33 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         $mform->addElement('header', 'general', get_string('modulename', 'groupmembers'));
 
         // Groupings selector - used to select grouping for groups in activity.
-        $options = array();
-        if ($groupings = $DB->get_records('groupings', array('courseid' => $COURSE->id))) {
+        $options = [];
+        if ($groupings = $DB->get_records('groupings', ['courseid' => $COURSE->id])) {
             foreach ($groupings as $grouping) {
                 $options[$grouping->id] = format_string($grouping->name);
             }
         }
         core_collator::asort($options);
-        $options = array(0 => get_string('none')) + $options;
+        $options = [0 => get_string('none')] + $options;
         $mform->addElement('select', 'listgroupingid', get_string('listgrouping', 'groupmembers'), $options);
         $mform->addRule('listgroupingid', null, 'required', null, 'client');
 
         // Group visibility selector - used to decide which groups to show in listing.
-        $options = array(
+        $options = [
             GROUPMEMBERS_SHOWGROUPS_ALL => get_string('showgroups:all', 'groupmembers'),
             GROUPMEMBERS_SHOWGROUPS_OWN => get_string('showgroups:own', 'groupmembers'),
-        );
+        ];
         $mform->addElement('select', 'showgroups', get_string('showgroups', 'groupmembers'), $options);
         $mform->addRule('showgroups', null, 'required', null, 'client');
         $mform->setDefault('showgroups', $config->showgroupsdefault);
 
         // E-Mail visibility selector - used to decide whether e-mail adresses should be shown to other users.
         if ($config->showemailenable) {
-            $options = array(
+            $options = [
                 GROUPMEMBERS_SHOWEMAIL_NO => get_string('showemail:no', 'groupmembers'),
                 GROUPMEMBERS_SHOWEMAIL_OWNGROUP => get_string('showemail:owngroup', 'groupmembers'),
                 GROUPMEMBERS_SHOWEMAIL_ALLGROUPS => get_string('showemail:allgroups', 'groupmembers'),
-            );
+            ];
             $mform->addElement('select', 'showemail', get_string('showemail', 'groupmembers'), $options);
             $mform->addRule('showemail', null, 'required', null, 'client');
             $mform->setDefault('showemail', $config->showemaildefault);
@@ -100,11 +100,11 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         // Phone visibility selector - used to decide whether phone numbers should be shown to other users.
         if ($config->showphoneenable) {
-            $options = array(
+            $options = [
                 GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
                 GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
                 GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
-            );
+            ];
             $mform->addElement('select', 'showphone', get_string('showphone', 'groupmembers'), $options);
             $mform->addRule('showphone', null, 'required', null, 'client');
             $mform->setDefault('showphone', $config->showphonedefault);
@@ -112,11 +112,11 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         // Department & Institution visibility selector - used to decide whether dept. and inst. should be shown to other users.
         if ($config->showdeptinstenable) {
-            $options = array(
+            $options = [
                 GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
                 GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
                 GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
-            );
+            ];
             $mform->addElement('select', 'showdeptinst', get_string('showdeptinst', 'groupmembers'), $options);
             $mform->addRule('showdeptinst', null, 'required', null, 'client');
             $mform->setDefault('showdeptinst', $config->showdeptinstdefault);
@@ -124,11 +124,11 @@ class mod_groupmembers_mod_form extends moodleform_mod {
 
         // Department & Institution visibility selector - used to decide whether dept. and inst. should be shown to other users.
         if ($config->showdescenable) {
-            $options = array(
+            $options = [
                 GROUPMEMBERS_SHOWFIELD_NO => get_string('showfield:no', 'groupmembers'),
                 GROUPMEMBERS_SHOWFIELD_OWNGROUP => get_string('showfield:owngroup', 'groupmembers'),
                 GROUPMEMBERS_SHOWFIELD_ALLGROUPS => get_string('showfield:allgroups', 'groupmembers'),
-            );
+            ];
             $mform->addElement('select', 'showdesc', get_string('showdesc', 'groupmembers'), $options);
             $mform->addRule('showdesc', null, 'required', null, 'client');
             $mform->setDefault('showdesc', $config->showdescdefault);
