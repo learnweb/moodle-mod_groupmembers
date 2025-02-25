@@ -23,9 +23,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace mod_groupmembers\output;
+
 defined('MOODLE_INTERNAL') || die();
-require_once(__DIR__. '/lib.php');
+require_once(__DIR__. '/../../lib.php');
 require_once($CFG->libdir. '/weblib.php');
+
+use core_user;
+use moodle_url;
 
 /**
  * Renderer definition for mod_groupmembers
@@ -35,7 +40,7 @@ require_once($CFG->libdir. '/weblib.php');
  * @copyright  2017 Jan C. Dageförde, WWU Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupmembers_renderer extends plugin_renderer_base {
+class renderer extends \plugin_renderer_base {
 
     /**
      * Render the groups table(s)
