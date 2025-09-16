@@ -1,7 +1,5 @@
 # ![moodle-mod_groupmembers](pix/icon.png) Resource Module: Group Members 
-[![Build Status](https://travis-ci.org/learnweb/moodle-mod_groupmembers.svg?branch=master)](https://travis-ci.org/learnweb/moodle-mod_groupmembers)
-[![codecov](https://codecov.io/gh/learnweb/moodle-mod_groupmembers/branch/master/graph/badge.svg)](https://codecov.io/gh/learnweb/moodle-mod_groupmembers)
-
+[![Moodle Plugin CI](https://github.com/learnweb/moodle-mod_groupmembers/actions/workflows/moodle-ci.yml/badge.svg)](https://github.com/learnweb/moodle-mod_groupmembers/actions/workflows/moodle-ci.yml)
 
 This plugin adds a resource module that shows all groups, all groups of a predefined grouping, or all groups that someone is enrolled in.
 Optionally, it displays email addresses of other members of one's group.
