@@ -50,5 +50,3 @@ $capabilities = [
         'clonepermissionsfrom' => 'moodle/course:manageactivities',
     ],
 ];
-
-

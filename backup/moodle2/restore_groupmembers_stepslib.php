@@ -25,7 +25,6 @@
  * Structure step to restore one groupmembers activity
  */
 class restore_groupmembers_activity_structure_step extends restore_activity_structure_step {
-
     /**
      * Define structure of restore step.
      */

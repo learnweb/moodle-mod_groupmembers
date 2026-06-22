@@ -23,8 +23,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__. '/../../config.php');
-require_once(__DIR__. '/lib.php');
+require_once(__DIR__ . '/../../config.php');
+require_once(__DIR__ . '/lib.php');
 
 $id = required_param('id', PARAM_INT);   // Course ID.
 $PAGE->set_url('/mod/groupmembers/index.php', ['id' => $id]);
@@ -48,16 +48,20 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($strplural);
 
 if (! $instances = get_all_instances_in_course('groupmembers', $course)) {
-    notice(get_string('thereareno', 'moodle', $strplural),
-        new moodle_url('/course/view.php', ['id' => $course->id]));
+    notice(
+        get_string('thereareno', 'moodle', $strplural),
+        new moodle_url('/course/view.php', ['id' => $course->id])
+    );
 }
 
 
 
 $linklist = [];
 foreach ($instances as $instance) {
-    $linklist[] = html_writer::link(new moodle_url('/mod/groupmembers/view.php', ['id' => $instance->coursemodule]),
-        $instance->name);
+    $linklist[] = html_writer::link(
+        new moodle_url('/mod/groupmembers/view.php', ['id' => $instance->coursemodule]),
+        $instance->name
+    );
 }
 echo html_writer::alist($linklist);
 

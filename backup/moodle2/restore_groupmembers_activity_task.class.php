@@ -32,7 +32,6 @@ require_once($CFG->dirroot . '/mod/groupmembers/backup/moodle2/restore_groupmemb
  * complete restore of the activity
  */
 class restore_groupmembers_activity_task extends restore_activity_task {
-
     /**
      * Define (add) particular settings this activity can have
      */
@@ -70,7 +69,6 @@ class restore_groupmembers_activity_task extends restore_activity_task {
         $rules[] = new restore_decode_rule('GROUPMEMBERINDEX', '/mod/groupmember/index.php?id=$1', 'course');
 
         return $rules;
-
     }
 
     /**

@@ -26,8 +26,8 @@
 namespace mod_groupmembers\output;
 
 defined('MOODLE_INTERNAL') || die();
-require_once(__DIR__. '/../../lib.php');
-require_once($CFG->libdir. '/weblib.php');
+require_once(__DIR__ . '/../../lib.php');
+require_once($CFG->libdir . '/weblib.php');
 
 use core_user;
 use moodle_url;
@@ -41,7 +41,6 @@ use moodle_url;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends \plugin_renderer_base {
-
     /**
      * Render the groups table(s)
      *
@@ -102,15 +101,19 @@ class renderer extends \plugin_renderer_base {
                         // Email address should not be rendered unless user has at least enabled display to course members.
                         // User has chosen not to reveal an email address. This can be made explicit by the template.
                         $memberemailhidden = true;
-                    } else if ($showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
-                        ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])) {
+                    } else if (
+                        $showemail == GROUPMEMBERS_SHOWEMAIL_ALLGROUPS ||
+                        ($showemail == GROUPMEMBERS_SHOWEMAIL_OWNGROUP && $group['ismember'])
+                    ) {
                         // Since user allows showing, the final decision is up to the module's settings ($showemail).
                         $memberemail = obfuscate_email($member->email);
                         $memberemailtext = obfuscate_text($member->email);
                     }
 
-                    if (!empty($CFG->messaging) &&
-                        has_capability('moodle/site:sendmessage', \context_system::instance())) {
+                    if (
+                        !empty($CFG->messaging) &&
+                        has_capability('moodle/site:sendmessage', \context_system::instance())
+                    ) {
                         $membermessage = new moodle_url('/message/index.php', ['id' => $member->id]);
                     }
 

@@ -25,7 +25,7 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
 /**
  * Settings mod_form for mod_groupmembers
@@ -37,7 +37,6 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
  *
  */
 class mod_groupmembers_mod_form extends moodleform_mod {
-
     /**
      * Coursemodule settings form definition.
      */
@@ -140,4 +139,3 @@ class mod_groupmembers_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 }
-
