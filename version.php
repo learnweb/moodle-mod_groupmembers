@@ -28,5 +28,5 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = 'v5.2-r0';
 $plugin->version   = 2026061700;         // The current module version (Date: YYYYMMDDXX).
-$plugin->requires  = 2024100712;         // Requires 4.1+ Moodle version.
+$plugin->requires  = 2024100712;         // Requires 4.5+ Moodle version.
 $plugin->component = 'mod_groupmembers'; // Full name of the plugin (used for diagnostics).
