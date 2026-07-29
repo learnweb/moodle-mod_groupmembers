@@ -23,8 +23,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__. '/../../config.php');
-require_once(__DIR__. '/lib.php');
+require_once(__DIR__ . '/../../config.php');
+require_once(__DIR__ . '/lib.php');
 
 $id = required_param('id', PARAM_INT);  // Course Module ID.
 $PAGE->set_url(new moodle_url('/mod/groupmembers/view.php', ['id' => $id]));
@@ -57,8 +57,12 @@ groupmembers_view($groupmembers, $course, $cm, $context);
 echo $OUTPUT->header();
 
 // Collect applicable groups and their members.
-$groupsandmembers = \mod_groupmembers\groups::get_groups_and_members($course->id, $groupmembers->listgroupingid,
-    $USER->id, $groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN);
+$groupsandmembers = \mod_groupmembers\groups::get_groups_and_members(
+    $course->id,
+    $groupmembers->listgroupingid,
+    $USER->id,
+    $groupmembers->showgroups == GROUPMEMBERS_SHOWGROUPS_OWN
+);
 
 // Output special texts if no group was retrieved; otherwise render list.
 if (count($groupsandmembers) === 0) {
@@ -70,8 +74,13 @@ if (count($groupsandmembers) === 0) {
 } else {
     /** @var mod_groupmembers_renderer $renderer */
     $renderer = $PAGE->get_renderer('mod_groupmembers');
-    echo $renderer->render_allgroups($groupsandmembers, $groupmembers->showemail, $groupmembers->showphone,
-                                     $groupmembers->showdeptinst, $groupmembers->showdesc);
+    echo $renderer->render_allgroups(
+        $groupsandmembers,
+        $groupmembers->showemail,
+        $groupmembers->showphone,
+        $groupmembers->showdeptinst,
+        $groupmembers->showdesc
+    );
 }
 
 // Theme footer.

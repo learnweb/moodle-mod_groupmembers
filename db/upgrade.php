@@ -59,7 +59,6 @@ function xmldb_groupmembers_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
         upgrade_mod_savepoint(true, 2022042100, 'groupmembers');
-
     }
 
     return true;

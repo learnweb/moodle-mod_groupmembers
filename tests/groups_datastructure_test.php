@@ -34,7 +34,6 @@ namespace mod_groupmembers;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class groups_datastructure_test extends \advanced_testcase {
-
     /**
      * Test pair:
      * - show only own groups
@@ -45,7 +44,7 @@ final class groups_datastructure_test extends \advanced_testcase {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
 
-        list($courseid, $userid, $groupid) = static::prepare_basic_data($dg);
+        [$courseid, $userid, $groupid] = static::prepare_basic_data($dg);
 
         static::assertEmpty(\mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, true));
 
@@ -66,7 +65,7 @@ final class groups_datastructure_test extends \advanced_testcase {
     public function test_only_own_withgrouping(): void {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
-        list($courseid, $userid, $groupid, $groupingid) = $this->prepare_basic_data($dg);
+        [$courseid, $userid, $groupid, $groupingid] = $this->prepare_basic_data($dg);
 
         $grouping2 = $dg->create_grouping(['courseid' => $courseid]);
 
@@ -91,7 +90,7 @@ final class groups_datastructure_test extends \advanced_testcase {
     public function test_all_nogrouping(): void {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
-        list($courseid, $userid, $groupid) = $this->prepare_basic_data($dg);
+        [$courseid, $userid, $groupid] = $this->prepare_basic_data($dg);
 
         $res1 = \mod_groupmembers\groups::get_groups_and_members($courseid, 0, $userid, false);
         static::assertCount(2, $res1);
@@ -111,7 +110,6 @@ final class groups_datastructure_test extends \advanced_testcase {
                 self::assertFalse($group['ismember']);
             }
         }
-
     }
 
     /**
@@ -123,7 +121,7 @@ final class groups_datastructure_test extends \advanced_testcase {
     public function test_all_withgrouping(): void {
         $this->resetAfterTest();
         $dg = static::getDataGenerator();
-        list($courseid, $userid) = $this->prepare_basic_data($dg);
+        [$courseid, $userid] = $this->prepare_basic_data($dg);
 
         // Create additional groups and groupings.
         $group3 = $dg->create_group(['courseid' => $courseid]);
